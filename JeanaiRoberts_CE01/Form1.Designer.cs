@@ -31,37 +31,37 @@ namespace JeanaiROberts_CE01
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gbUserInput = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.rdoBlueText = new System.Windows.Forms.RadioButton();
             this.rdoRedText = new System.Windows.Forms.RadioButton();
             this.bttnAdd = new System.Windows.Forms.Button();
             this.chkbSeen = new System.Windows.Forms.CheckBox();
             this.txtBMovieName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.bttnDelete = new System.Windows.Forms.Button();
+            this.bttnEdit = new System.Windows.Forms.Button();
+            this.bttnMove = new System.Windows.Forms.Button();
             this.gbNotSeenList = new System.Windows.Forms.GroupBox();
             this.lbNotSeen = new System.Windows.Forms.ListBox();
             this.gbSeen = new System.Windows.Forms.GroupBox();
             this.lbSeen = new System.Windows.Forms.ListBox();
-            this.bttnDelete = new System.Windows.Forms.Button();
-            this.bttnEdit = new System.Windows.Forms.Button();
-            this.bttnMove = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.gbUserInput.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.gbUserInput.SuspendLayout();
             this.gbNotSeenList.SuspendLayout();
             this.gbSeen.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -74,6 +74,39 @@ namespace JeanaiROberts_CE01
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 27);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(602, 40);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(356, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // tabControl1
             // 
@@ -92,10 +125,25 @@ namespace JeanaiROberts_CE01
             this.tabPage1.Location = new System.Drawing.Point(8, 39);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(586, 881);
+            this.tabPage1.Size = new System.Drawing.Size(586, 873);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Movie Input";
+            this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.gbNotSeenList);
+            this.tabPage2.Controls.Add(this.gbSeen);
+            this.tabPage2.Controls.Add(this.bttnDelete);
+            this.tabPage2.Controls.Add(this.bttnEdit);
+            this.tabPage2.Controls.Add(this.bttnMove);
+            this.tabPage2.Location = new System.Drawing.Point(8, 39);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(586, 881);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // gbUserInput
             // 
@@ -109,19 +157,10 @@ namespace JeanaiROberts_CE01
             this.gbUserInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbUserInput.Location = new System.Drawing.Point(3, 3);
             this.gbUserInput.Name = "gbUserInput";
-            this.gbUserInput.Size = new System.Drawing.Size(580, 875);
+            this.gbUserInput.Size = new System.Drawing.Size(580, 867);
             this.gbUserInput.TabIndex = 3;
             this.gbUserInput.TabStop = false;
             this.gbUserInput.Text = "Movie Input";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 406);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 25);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Select text color";
             // 
             // rdoBlueText
             // 
@@ -180,20 +219,41 @@ namespace JeanaiROberts_CE01
             this.label1.TabIndex = 0;
             this.label1.Text = "Movie Name:";
             // 
-            // tabPage2
+            // label2
             // 
-            this.tabPage2.Controls.Add(this.gbNotSeenList);
-            this.tabPage2.Controls.Add(this.gbSeen);
-            this.tabPage2.Controls.Add(this.bttnDelete);
-            this.tabPage2.Controls.Add(this.bttnEdit);
-            this.tabPage2.Controls.Add(this.bttnMove);
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(586, 881);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Movie Lists";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(85, 406);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(166, 25);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Select text color";
+            // 
+            // bttnDelete
+            // 
+            this.bttnDelete.Location = new System.Drawing.Point(387, 762);
+            this.bttnDelete.Name = "bttnDelete";
+            this.bttnDelete.Size = new System.Drawing.Size(161, 60);
+            this.bttnDelete.TabIndex = 14;
+            this.bttnDelete.Text = "Delete";
+            this.bttnDelete.UseVisualStyleBackColor = true;
+            // 
+            // bttnEdit
+            // 
+            this.bttnEdit.Location = new System.Drawing.Point(207, 765);
+            this.bttnEdit.Name = "bttnEdit";
+            this.bttnEdit.Size = new System.Drawing.Size(161, 55);
+            this.bttnEdit.TabIndex = 13;
+            this.bttnEdit.Text = "Edit";
+            this.bttnEdit.UseVisualStyleBackColor = true;
+            // 
+            // bttnMove
+            // 
+            this.bttnMove.Location = new System.Drawing.Point(25, 767);
+            this.bttnMove.Name = "bttnMove";
+            this.bttnMove.Size = new System.Drawing.Size(161, 51);
+            this.bttnMove.TabIndex = 12;
+            this.bttnMove.Text = "Move";
+            this.bttnMove.UseVisualStyleBackColor = true;
             // 
             // gbNotSeenList
             // 
@@ -235,74 +295,14 @@ namespace JeanaiROberts_CE01
             this.lbSeen.Size = new System.Drawing.Size(571, 307);
             this.lbSeen.TabIndex = 0;
             // 
-            // bttnDelete
-            // 
-            this.bttnDelete.Location = new System.Drawing.Point(387, 762);
-            this.bttnDelete.Name = "bttnDelete";
-            this.bttnDelete.Size = new System.Drawing.Size(161, 60);
-            this.bttnDelete.TabIndex = 14;
-            this.bttnDelete.Text = "Delete";
-            this.bttnDelete.UseVisualStyleBackColor = true;
-            // 
-            // bttnEdit
-            // 
-            this.bttnEdit.Location = new System.Drawing.Point(207, 765);
-            this.bttnEdit.Name = "bttnEdit";
-            this.bttnEdit.Size = new System.Drawing.Size(161, 55);
-            this.bttnEdit.TabIndex = 13;
-            this.bttnEdit.Text = "Edit";
-            this.bttnEdit.UseVisualStyleBackColor = true;
-            // 
-            // bttnMove
-            // 
-            this.bttnMove.Location = new System.Drawing.Point(25, 767);
-            this.bttnMove.Name = "bttnMove";
-            this.bttnMove.Size = new System.Drawing.Size(161, 51);
-            this.bttnMove.TabIndex = 12;
-            this.bttnMove.Text = "Move";
-            this.bttnMove.UseVisualStyleBackColor = true;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 27);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(602, 40);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(279, 44);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.printToolStripMenuItem.Text = "&Print";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(276, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(279, 44);
-            this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // Form1
             // 
@@ -319,15 +319,15 @@ namespace JeanaiROberts_CE01
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.gbUserInput.ResumeLayout(false);
-            this.gbUserInput.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.gbNotSeenList.ResumeLayout(false);
-            this.gbSeen.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.gbUserInput.ResumeLayout(false);
+            this.gbUserInput.PerformLayout();
+            this.gbNotSeenList.ResumeLayout(false);
+            this.gbSeen.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
