@@ -37,12 +37,12 @@ namespace JeanaiRoberts_CE01
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bttnDelete = new System.Windows.Forms.Button();
             this.gbNotComplete = new System.Windows.Forms.GroupBox();
             this.lbNotTaken = new System.Windows.Forms.ListBox();
+            this.bttnEdit = new System.Windows.Forms.Button();
             this.gbCompleteCourses = new System.Windows.Forms.GroupBox();
             this.lbComplete = new System.Windows.Forms.ListBox();
-            this.bttnDelete = new System.Windows.Forms.Button();
-            this.bttnEdit = new System.Windows.Forms.Button();
             this.bttnMove = new System.Windows.Forms.Button();
             this.bttnAdd = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -88,7 +88,7 @@ namespace JeanaiRoberts_CE01
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(280, 44);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // printToolStripMenuItem
@@ -124,6 +124,15 @@ namespace JeanaiRoberts_CE01
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // bttnDelete
+            // 
+            this.bttnDelete.Location = new System.Drawing.Point(340, 913);
+            this.bttnDelete.Name = "bttnDelete";
+            this.bttnDelete.Size = new System.Drawing.Size(161, 60);
+            this.bttnDelete.TabIndex = 15;
+            this.bttnDelete.Text = "Delete";
+            this.bttnDelete.UseVisualStyleBackColor = true;
+            // 
             // gbNotComplete
             // 
             this.gbNotComplete.Controls.Add(this.lbNotTaken);
@@ -143,6 +152,15 @@ namespace JeanaiRoberts_CE01
             this.lbNotTaken.Name = "lbNotTaken";
             this.lbNotTaken.Size = new System.Drawing.Size(587, 327);
             this.lbNotTaken.TabIndex = 0;
+            // 
+            // bttnEdit
+            // 
+            this.bttnEdit.Location = new System.Drawing.Point(340, 840);
+            this.bttnEdit.Name = "bttnEdit";
+            this.bttnEdit.Size = new System.Drawing.Size(161, 55);
+            this.bttnEdit.TabIndex = 14;
+            this.bttnEdit.Text = "Edit";
+            this.bttnEdit.UseVisualStyleBackColor = true;
             // 
             // gbCompleteCourses
             // 
@@ -164,24 +182,6 @@ namespace JeanaiRoberts_CE01
             this.lbComplete.Size = new System.Drawing.Size(581, 324);
             this.lbComplete.TabIndex = 0;
             // 
-            // bttnDelete
-            // 
-            this.bttnDelete.Location = new System.Drawing.Point(340, 913);
-            this.bttnDelete.Name = "bttnDelete";
-            this.bttnDelete.Size = new System.Drawing.Size(161, 60);
-            this.bttnDelete.TabIndex = 15;
-            this.bttnDelete.Text = "Delete";
-            this.bttnDelete.UseVisualStyleBackColor = true;
-            // 
-            // bttnEdit
-            // 
-            this.bttnEdit.Location = new System.Drawing.Point(340, 840);
-            this.bttnEdit.Name = "bttnEdit";
-            this.bttnEdit.Size = new System.Drawing.Size(161, 55);
-            this.bttnEdit.TabIndex = 14;
-            this.bttnEdit.Text = "Edit";
-            this.bttnEdit.UseVisualStyleBackColor = true;
-            // 
             // bttnMove
             // 
             this.bttnMove.Location = new System.Drawing.Point(114, 916);
@@ -199,6 +199,7 @@ namespace JeanaiRoberts_CE01
             this.bttnAdd.TabIndex = 12;
             this.bttnAdd.Text = "Add";
             this.bttnAdd.UseVisualStyleBackColor = true;
+            this.bttnAdd.Click += new System.EventHandler(this.bttnAdd_Click);
             // 
             // Form1
             // 
@@ -207,11 +208,12 @@ namespace JeanaiRoberts_CE01
             this.AutoScroll = true;
             this.BackgroundImage = global::JeanaiRoberts_CE01.Properties.Resources.iPhone7Image__1_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(661, 1280);
+            this.ClientSize = new System.Drawing.Size(661, 1314);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

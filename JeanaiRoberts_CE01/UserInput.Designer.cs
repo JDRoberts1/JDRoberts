@@ -30,20 +30,22 @@ namespace JeanaiRoberts_CE01
         private void InitializeComponent()
         {
             this.classInput = new System.Windows.Forms.GroupBox();
-            this.txtClassName = new System.Windows.Forms.TextBox();
-            this.chkTaken = new System.Windows.Forms.CheckBox();
-            this.dateClassDate = new System.Windows.Forms.DateTimePicker();
-            this.rdoRed = new System.Windows.Forms.RadioButton();
-            this.rdoBlue = new System.Windows.Forms.RadioButton();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.rdoBlue = new System.Windows.Forms.RadioButton();
+            this.rdoRed = new System.Windows.Forms.RadioButton();
+            this.dateClassDate = new System.Windows.Forms.DateTimePicker();
+            this.chkTaken = new System.Windows.Forms.CheckBox();
+            this.txtClassName = new System.Windows.Forms.TextBox();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.classInput.SuspendLayout();
             this.SuspendLayout();
             // 
             // classInput
             // 
+            this.classInput.Controls.Add(this.btnAdd);
             this.classInput.Controls.Add(this.label3);
             this.classInput.Controls.Add(this.label2);
             this.classInput.Controls.Add(this.label1);
@@ -60,42 +62,41 @@ namespace JeanaiRoberts_CE01
             this.classInput.TabStop = false;
             this.classInput.Text = "Course Information";
             // 
-            // txtClassName
+            // label3
             // 
-            this.txtClassName.Location = new System.Drawing.Point(255, 144);
-            this.txtClassName.Name = "txtClassName";
-            this.txtClassName.Size = new System.Drawing.Size(220, 31);
-            this.txtClassName.TabIndex = 0;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(27, 389);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(166, 25);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Select text color";
             // 
-            // chkTaken
+            // label2
             // 
-            this.chkTaken.AutoSize = true;
-            this.chkTaken.Location = new System.Drawing.Point(255, 209);
-            this.chkTaken.Name = "chkTaken";
-            this.chkTaken.Size = new System.Drawing.Size(218, 29);
-            this.chkTaken.TabIndex = 1;
-            this.chkTaken.Text = "Course complete?";
-            this.chkTaken.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 278);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(263, 25);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Date Projected/Completed";
             // 
-            // dateClassDate
+            // label1
             // 
-            this.dateClassDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateClassDate.Location = new System.Drawing.Point(310, 272);
-            this.dateClassDate.Name = "dateClassDate";
-            this.dateClassDate.Size = new System.Drawing.Size(165, 31);
-            this.dateClassDate.TabIndex = 2;
-            this.dateClassDate.Value = new System.DateTime(2021, 1, 4, 19, 0, 25, 0);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 147);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 25);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Class Name";
             // 
-            // rdoRed
+            // btnSave
             // 
-            this.rdoRed.AutoSize = true;
-            this.rdoRed.Location = new System.Drawing.Point(255, 353);
-            this.rdoRed.Name = "rdoRed";
-            this.rdoRed.Size = new System.Drawing.Size(123, 29);
-            this.rdoRed.TabIndex = 3;
-            this.rdoRed.TabStop = true;
-            this.rdoRed.Text = "Red text";
-            this.rdoRed.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(203, 634);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(175, 65);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // rdoBlue
             // 
@@ -108,41 +109,52 @@ namespace JeanaiRoberts_CE01
             this.rdoBlue.Text = "Blue text";
             this.rdoBlue.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // rdoRed
             // 
-            this.btnSave.Location = new System.Drawing.Point(203, 564);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(175, 65);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.rdoRed.AutoSize = true;
+            this.rdoRed.Location = new System.Drawing.Point(255, 353);
+            this.rdoRed.Name = "rdoRed";
+            this.rdoRed.Size = new System.Drawing.Size(123, 29);
+            this.rdoRed.TabIndex = 3;
+            this.rdoRed.TabStop = true;
+            this.rdoRed.Text = "Red text";
+            this.rdoRed.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // dateClassDate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 147);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Class Name";
+            this.dateClassDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateClassDate.Location = new System.Drawing.Point(310, 272);
+            this.dateClassDate.Name = "dateClassDate";
+            this.dateClassDate.Size = new System.Drawing.Size(165, 31);
+            this.dateClassDate.TabIndex = 2;
+            this.dateClassDate.Value = new System.DateTime(2021, 1, 4, 19, 0, 25, 0);
             // 
-            // label2
+            // chkTaken
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 278);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(263, 25);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Date Projected/Completed";
+            this.chkTaken.AutoSize = true;
+            this.chkTaken.Location = new System.Drawing.Point(255, 209);
+            this.chkTaken.Name = "chkTaken";
+            this.chkTaken.Size = new System.Drawing.Size(218, 29);
+            this.chkTaken.TabIndex = 1;
+            this.chkTaken.Text = "Course complete?";
+            this.chkTaken.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // txtClassName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 389);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(166, 25);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Select text color";
+            this.txtClassName.Location = new System.Drawing.Point(255, 144);
+            this.txtClassName.Name = "txtClassName";
+            this.txtClassName.Size = new System.Drawing.Size(220, 31);
+            this.txtClassName.TabIndex = 0;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(203, 522);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(175, 65);
+            this.btnAdd.TabIndex = 10;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // UserInput
             // 
@@ -174,5 +186,6 @@ namespace JeanaiRoberts_CE01
         private System.Windows.Forms.DateTimePicker dateClassDate;
         private System.Windows.Forms.CheckBox chkTaken;
         private System.Windows.Forms.TextBox txtClassName;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

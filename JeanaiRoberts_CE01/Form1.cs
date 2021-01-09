@@ -12,6 +12,11 @@ namespace JeanaiRoberts_CE01
 {
     public partial class Form1 : Form
     {
+        UserInput movieInput = new UserInput();
+        
+        List<Course> compCourse;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +49,31 @@ namespace JeanaiRoberts_CE01
 
             this.Size = new Size(376, 720);
 
+        }
+
+        private void bttnAdd_Click(object sender, EventArgs e)
+        {
+            movieInput.ShowDialog();
+        }
+
+        public void HandleAddToList(object sender, EventArgs e)
+        {
+            Course newCourse = (Course)sender;
+
+            if(newCourse.CourseComplete != true)
+            {
+                lbNotTaken.Items.Add(newCourse.ToString());
+            }
+            else
+            {
+                lbComplete.Items.Add(newCourse.ToString());
+            }
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            movieInput.AddToListBox += new EventHandler(HandleAddToList);
         }
     }
 }

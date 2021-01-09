@@ -12,6 +12,10 @@ namespace JeanaiRoberts_CE01
 {
     public partial class UserInput : Form
     {
+        public EventHandler AddToListBox;
+        Course newCourse;
+        public List<Course> courseList = new List<Course>();
+
         public UserInput()
         {
             InitializeComponent();
@@ -44,6 +48,44 @@ namespace JeanaiRoberts_CE01
 
             this.Size = new Size(376, 720);
 
+        }
+
+        void ClearInput()
+        {
+            txtClassName.Clear();
+            chkTaken.Checked = false;
+            dateClassDate.Value = DateTime.Now;
+            rdoRed.Checked = false;
+            rdoBlue.Checked = false;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            newCourse = new Course();
+            newCourse.CourseName = txtClassName.Text;
+            newCourse.CourseComplete = chkTaken.Checked;
+
+            newCourse.CourseDate = dateClassDate.Value.ToShortDateString();
+
+            if(rdoRed.Checked == true)
+            {
+                newCourse.CourseColor = "Red";
+
+            }
+            else if (rdoBlue.Checked == true)
+            {
+                newCourse.CourseColor = "Blue";
+            }
+            else
+            {
+                newCourse.CourseColor = "Black";
+            }
+
+            sender = newCourse;
+
+            AddToListBox?.Invoke(sender, new EventArgs());
+
+            ClearInput();
         }
     }
 }
