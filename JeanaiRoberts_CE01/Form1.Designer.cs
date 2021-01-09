@@ -190,6 +190,7 @@ namespace JeanaiRoberts_CE01
             this.bttnMove.TabIndex = 13;
             this.bttnMove.Text = "Move";
             this.bttnMove.UseVisualStyleBackColor = true;
+            this.bttnMove.Click += new System.EventHandler(this.bttnMove_Click);
             // 
             // bttnAdd
             // 

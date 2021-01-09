@@ -14,7 +14,7 @@ namespace JeanaiRoberts_CE01
     {
         public EventHandler AddToListBox;
         Course newCourse;
-        public List<Course> courseList = new List<Course>();
+        
 
         public UserInput()
         {

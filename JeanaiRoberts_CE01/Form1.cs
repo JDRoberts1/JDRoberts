@@ -13,15 +13,72 @@ namespace JeanaiRoberts_CE01
     public partial class Form1 : Form
     {
         UserInput movieInput = new UserInput();
-        
-        List<Course> compCourse;
-
 
         public Form1()
         {
             InitializeComponent();
             HandleClientWindowSize();
         }
+
+        // Events
+
+        private void bttnAdd_Click(object sender, EventArgs e)
+        {
+            movieInput.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            movieInput.AddToListBox += new EventHandler(HandleAddToList);
+        }
+
+        
+        private void bttnMove_Click(object sender, EventArgs e)
+        {
+            if(lbComplete.SelectedItem != null)
+            {
+                ((Course)lbComplete.SelectedItem).CourseComplete = false;
+
+                if (((Course)lbComplete.SelectedItem).CourseColor == "Red")
+                {
+                    lbNotTaken.ForeColor = Color.Red;
+                    MoveItem(lbComplete, lbNotTaken);
+                }
+                else if (((Course)lbComplete.SelectedItem).CourseColor == "Blue")
+                {
+                    lbNotTaken.ForeColor = Color.Blue;
+                    MoveItem(lbComplete, lbNotTaken);
+                }
+                else
+                {
+                    lbNotTaken.ForeColor = default;
+                    MoveItem(lbComplete, lbNotTaken);
+                }
+            }
+
+            if(lbNotTaken.SelectedItem != null)
+            {
+                ((Course)lbNotTaken.SelectedItem).CourseComplete = true;
+
+                if (((Course)lbNotTaken.SelectedItem).CourseColor == "Red")
+                {
+                    lbComplete.ForeColor = Color.Red;
+                    MoveItem(lbNotTaken, lbComplete);
+                }
+                else if (((Course)lbNotTaken.SelectedItem).CourseColor == "Blue")
+                {
+                    lbComplete.ForeColor = Color.Blue;
+                    MoveItem(lbNotTaken, lbComplete);
+                }
+                else
+                {
+                    lbComplete.ForeColor = default;
+                    MoveItem(lbNotTaken, lbComplete);
+                }
+            }
+        }
+
+        // Handler Methods
 
         void HandleClientWindowSize()
         {
@@ -50,30 +107,59 @@ namespace JeanaiRoberts_CE01
             this.Size = new Size(376, 720);
 
         }
-
-        private void bttnAdd_Click(object sender, EventArgs e)
-        {
-            movieInput.ShowDialog();
-        }
-
         public void HandleAddToList(object sender, EventArgs e)
         {
             Course newCourse = (Course)sender;
 
-            if(newCourse.CourseComplete != true)
+            if (newCourse.CourseComplete != true)
             {
-                lbNotTaken.Items.Add(newCourse.ToString());
+                if (newCourse.CourseColor == "Red")
+                {
+                    lbNotTaken.ForeColor = Color.Red;
+                    lbNotTaken.Items.Add(newCourse);
+                }
+                else if (newCourse.CourseColor == "Blue")
+                {
+                    lbNotTaken.ForeColor = Color.Blue;
+                    lbNotTaken.Items.Add(newCourse);
+                }
+                else
+                {
+                    lbNotTaken.ForeColor = default;
+                    lbNotTaken.Items.Add(newCourse);
+                }
             }
             else
             {
-                lbComplete.Items.Add(newCourse.ToString());
+                if (newCourse.CourseColor == "Red")
+                {
+                    lbComplete.ForeColor = Color.Red;
+                    lbComplete.Items.Add(newCourse);
+                }
+                else if (newCourse.CourseColor == "Blue")
+                {
+                    lbComplete.ForeColor = Color.Blue;
+                    lbComplete.Items.Add(newCourse);
+                }
+                else
+                {
+                    lbComplete.ForeColor = default;
+                    lbComplete.Items.Add(newCourse.ToString());
+                }
             }
-            
+
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        // Methods
+
+        private void MoveItem (ListBox lstfrm, ListBox lstto)
         {
-            movieInput.AddToListBox += new EventHandler(HandleAddToList);
+            while(lstfrm.SelectedItems.Count > 0)
+            {
+                Course course = (Course)lstfrm.SelectedItems[0];
+                lstto.Items.Add(course);
+                lstfrm.Items.Remove(course);
+            }
         }
     }
 }
