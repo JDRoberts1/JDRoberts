@@ -30,6 +30,7 @@ namespace JeanaiRoberts_CE01
         private void InitializeComponent()
         {
             this.classInput = new System.Windows.Forms.GroupBox();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@ namespace JeanaiRoberts_CE01
             this.dateClassDate = new System.Windows.Forms.DateTimePicker();
             this.chkTaken = new System.Windows.Forms.CheckBox();
             this.txtClassName = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.classInput.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,16 @@ namespace JeanaiRoberts_CE01
             this.classInput.TabIndex = 0;
             this.classInput.TabStop = false;
             this.classInput.Text = "Course Information";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(203, 522);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(175, 65);
+            this.btnAdd.TabIndex = 10;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label3
             // 
@@ -97,6 +107,7 @@ namespace JeanaiRoberts_CE01
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // rdoBlue
             // 
@@ -146,16 +157,6 @@ namespace JeanaiRoberts_CE01
             this.txtClassName.Size = new System.Drawing.Size(220, 31);
             this.txtClassName.TabIndex = 0;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(203, 522);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(175, 65);
-            this.btnAdd.TabIndex = 10;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // UserInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -163,11 +164,12 @@ namespace JeanaiRoberts_CE01
             this.AutoScroll = true;
             this.BackgroundImage = global::JeanaiRoberts_CE01.Properties.Resources.iPhone7Image__1_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(661, 1280);
+            this.ClientSize = new System.Drawing.Size(661, 1348);
             this.Controls.Add(this.classInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "UserInput";
             this.Text = "Movie Input";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserInput_FormClosed);
             this.classInput.ResumeLayout(false);
             this.classInput.PerformLayout();
             this.ResumeLayout(false);

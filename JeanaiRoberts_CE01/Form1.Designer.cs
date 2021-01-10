@@ -162,6 +162,7 @@ namespace JeanaiRoberts_CE01
             this.bttnEdit.TabIndex = 14;
             this.bttnEdit.Text = "Edit";
             this.bttnEdit.UseVisualStyleBackColor = true;
+            this.bttnEdit.Click += new System.EventHandler(this.bttnEdit_Click);
             // 
             // gbCompleteCourses
             // 

@@ -13,6 +13,7 @@ namespace JeanaiRoberts_CE01
     public partial class Form1 : Form
     {
         UserInput movieInput = new UserInput();
+        public EventHandler DisplaySelectedItem;
 
         public Form1()
         {
@@ -24,12 +25,16 @@ namespace JeanaiRoberts_CE01
 
         private void bttnAdd_Click(object sender, EventArgs e)
         {
+            movieInput.AddButton();
             movieInput.ShowDialog();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             movieInput.AddToListBox += new EventHandler(HandleAddToList);
+            DisplaySelectedItem += new EventHandler(movieInput.HandleDisplay);
+            movieInput.ModifyCourse += new EventHandler<ModifyCourseEventArgs>(HandleModifyObject);
         }
 
         
@@ -147,7 +152,36 @@ namespace JeanaiRoberts_CE01
                     lbComplete.Items.Add(newCourse.ToString());
                 }
             }
+        }
 
+        public void HandleModifyObject(object sender, ModifyCourseEventArgs e)
+        {
+            Course c = e.CourseToModify1 as Course;
+
+            if(lbComplete.SelectedItem != null)
+            {
+                ((Course)lbComplete.SelectedItem).CourseName = c.CourseName;
+                ((Course)lbComplete.SelectedItem).CourseComplete = c.CourseComplete;
+                ((Course)lbComplete.SelectedItem).CourseDate = c.CourseDate;
+                ((Course)lbComplete.SelectedItem).CourseColor = c.CourseColor;
+
+                if(c.CourseComplete != true)
+                {
+                    MoveItem(lbComplete, lbNotTaken);
+                }
+            }
+            else if(lbNotTaken.SelectedItem != null)
+            {
+                ((Course)lbNotTaken.SelectedItem).CourseName = c.CourseName;
+                ((Course)lbNotTaken.SelectedItem).CourseComplete = c.CourseComplete;
+                ((Course)lbNotTaken.SelectedItem).CourseDate = c.CourseDate;
+                ((Course)lbNotTaken.SelectedItem).CourseColor = c.CourseColor;
+
+                if (c.CourseComplete != false)
+                {
+                    MoveItem(lbNotTaken, lbComplete);
+                }
+            }
         }
 
         // Methods
@@ -166,6 +200,29 @@ namespace JeanaiRoberts_CE01
         {
             lbComplete.Items.Remove(lbComplete.SelectedItem);
             lbNotTaken.Items.Remove(lbNotTaken.SelectedItem);
+        }
+
+        private void bttnEdit_Click(object sender, EventArgs e)
+        {
+            movieInput.SaveButton();
+            movieInput.Show();
+
+            if (lbComplete.SelectedItem != null)
+            {
+                sender = ((Course)lbComplete.SelectedItem);
+            }
+
+            if(lbNotTaken.SelectedItem != null)
+            {
+                sender = ((Course)lbNotTaken.SelectedItem);
+            }
+
+
+            if (DisplaySelectedItem != null)
+            {
+                DisplaySelectedItem(sender, new EventArgs());
+            }
+            
         }
     }
 }

@@ -12,8 +12,10 @@ namespace JeanaiRoberts_CE01
 {
     public partial class UserInput : Form
     {
-        public EventHandler AddToListBox;
+        
         Course newCourse;
+        public EventHandler AddToListBox;
+        public EventHandler<ModifyCourseEventArgs> ModifyCourse;
         
 
         public UserInput()
@@ -62,6 +64,7 @@ namespace JeanaiRoberts_CE01
         private void btnAdd_Click(object sender, EventArgs e)
         {
             newCourse = new Course();
+
             newCourse.CourseName = txtClassName.Text;
             newCourse.CourseComplete = chkTaken.Checked;
 
@@ -86,6 +89,78 @@ namespace JeanaiRoberts_CE01
             AddToListBox?.Invoke(sender, new EventArgs());
 
             ClearInput();
+        }
+        
+        public void SaveButton()
+        {
+            btnAdd.Visible = false;
+            btnSave.Visible = true;
+        }
+
+        public void AddButton()
+        {
+            btnAdd.Visible = true;
+            btnSave.Visible = false;
+        }
+
+        public void HandleDisplay(object sender, EventArgs e)
+        {
+            newCourse = (Course)sender;
+            txtClassName.Text = newCourse.CourseName;
+            chkTaken.Checked = newCourse.CourseComplete;
+            DateTime date = Convert.ToDateTime(newCourse.CourseDate);
+            dateClassDate.Value = date;
+
+            if(newCourse.CourseColor == "Red")
+            {
+                rdoRed.Checked = true;
+                rdoBlue.Checked = false;
+            }
+            else if(newCourse.CourseColor == "Blue")
+            {
+                rdoBlue.Checked = true;
+                rdoRed.Checked = false;
+            }
+            else
+            {
+                rdoRed.Checked = false;
+                rdoBlue.Checked = false;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            newCourse = new Course();
+            newCourse.CourseName = txtClassName.Text;
+            newCourse.CourseComplete = chkTaken.Checked;
+            newCourse.CourseDate = dateClassDate.Value.ToShortDateString();
+
+            if(rdoRed.Checked == true)
+            {
+                newCourse.CourseColor = "Red";
+            }
+            else if(rdoBlue.Checked == true)
+            {
+                newCourse.CourseColor = "Blue";
+            }
+            else
+            {
+                newCourse.CourseColor = "Black";
+            }
+
+            sender = newCourse;
+
+            if(ModifyCourse != null)
+            {
+                ModifyCourse(sender, new ModifyCourseEventArgs(newCourse));
+            }
+
+            
+        }
+
+        private void UserInput_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
         }
     }
 }
