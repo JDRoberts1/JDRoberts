@@ -161,5 +161,11 @@ namespace JeanaiRoberts_CE01
                 lstfrm.Items.Remove(course);
             }
         }
+
+        private void bttnDelete_Click(object sender, EventArgs e)
+        {
+            lbComplete.Items.Remove(lbComplete.SelectedItem);
+            lbNotTaken.Items.Remove(lbNotTaken.SelectedItem);
+        }
     }
 }

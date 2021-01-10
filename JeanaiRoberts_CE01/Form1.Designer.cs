@@ -132,6 +132,7 @@ namespace JeanaiRoberts_CE01
             this.bttnDelete.TabIndex = 15;
             this.bttnDelete.Text = "Delete";
             this.bttnDelete.UseVisualStyleBackColor = true;
+            this.bttnDelete.Click += new System.EventHandler(this.bttnDelete_Click);
             // 
             // gbNotComplete
             // 
