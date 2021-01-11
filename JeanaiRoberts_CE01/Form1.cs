@@ -17,7 +17,8 @@ namespace JeanaiRoberts_CE01
         public EventHandler DisplaySelectedItem;
         public EventHandler SaveXML;
         public EventHandler LoadXML;
-        Course newCourse;
+        public EventHandler PrintList;
+        
 
         public Form1()
         {
@@ -46,6 +47,7 @@ namespace JeanaiRoberts_CE01
             movieInput.ModifyCourse += new EventHandler<ModifyCourseEventArgs>(HandleModifyObject);
             SaveXML += new EventHandler(HandleSaveXML);
             LoadXML += new EventHandler(HandleLoadXML);
+            PrintList += new EventHandler(HandleSaveAsTXT);
         }
 
         
@@ -205,6 +207,16 @@ namespace JeanaiRoberts_CE01
             movieInput.ShowDialog();
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         // Handler Methods
         void HandleClientWindowSize()
         {
@@ -239,39 +251,11 @@ namespace JeanaiRoberts_CE01
 
             if (newCourse.CourseComplete != true)
             {
-                if (newCourse.CourseColor == "Red")
-                {
-                    lbNotTaken.ForeColor = Color.Red;
-                    lbNotTaken.Items.Add(newCourse);
-                }
-                else if (newCourse.CourseColor == "Blue")
-                {
-                    lbNotTaken.ForeColor = Color.Blue;
-                    lbNotTaken.Items.Add(newCourse);
-                }
-                else
-                {
-                    lbNotTaken.ForeColor = default;
-                    lbNotTaken.Items.Add(newCourse);
-                }
+                AddListBox(newCourse);
             }
             else
             {
-                if (newCourse.CourseColor == "Red")
-                {
-                    lbComplete.ForeColor = Color.Red;
-                    lbComplete.Items.Add(newCourse);
-                }
-                else if (newCourse.CourseColor == "Blue")
-                {
-                    lbComplete.ForeColor = Color.Blue;
-                    lbComplete.Items.Add(newCourse);
-                }
-                else
-                {
-                    lbComplete.ForeColor = default;
-                    lbComplete.Items.Add(newCourse);
-                }
+                AddListBox(newCourse);
             }
         }
 
@@ -378,6 +362,8 @@ namespace JeanaiRoberts_CE01
 
                     if (lbComplete.Items.Count > 0)
                     {
+                        writer.WriteStartElement("CompleteList");
+
                         foreach (Course c in lbComplete.Items)
                         {
                             writer.WriteElementString("CourseName", c.CourseName);
@@ -385,10 +371,14 @@ namespace JeanaiRoberts_CE01
                             writer.WriteElementString("CourseDate", c.CourseDate);
                             writer.WriteElementString("CourseColor", c.CourseColor);
                         }
+
+                        writer.WriteEndElement();
                     }
 
                     if (lbNotTaken.Items.Count > 0)
                     {
+                        writer.WriteStartElement("CompleteList");
+
                         foreach (Course c in lbNotTaken.Items)
                         {
                             writer.WriteElementString("CourseName", c.CourseName);
@@ -396,6 +386,8 @@ namespace JeanaiRoberts_CE01
                             writer.WriteElementString("CourseDate", c.CourseDate);
                             writer.WriteElementString("CourseColor", c.CourseColor);
                         }
+
+                        writer.WriteEndElement();
                     }
 
                     writer.WriteEndElement();
@@ -427,59 +419,62 @@ namespace JeanaiRoberts_CE01
 
                     while (reader.Read())
                     {
-                        Course newCourse = new Course();
-
                         if (reader.Name == "CourseName" && reader.IsStartElement())
                         {
-                            newCourse.CourseName = reader.ReadElementContentAsString();
+                            if (reader.Name == "CourseName")
+                            {
+                                Course newCourse = new Course();
 
-                            if (reader.Name == "CourseComplete")
-                            {
-                                newCourse.CourseDate = reader.ReadElementContentAsString();
-                            }
-                            if (reader.Name == "CourseDate")
-                            {
-                                newCourse.CourseDate = reader.ReadElementContentAsString();
-                            }
-                            if (reader.Name == "CourseColor")
-                            {
-                                newCourse.CourseColor = reader.ReadElementContentAsString();
-                            }
+                                newCourse.CourseName = reader.ReadElementContentAsString();
 
-                            if (newCourse.CourseComplete == true)
-                            {
-                                if (newCourse.CourseColor == "Red")
+                                if (reader.Name == "CourseComplete")
                                 {
-                                    lbComplete.ForeColor = Color.Red;
-                                    lbComplete.Items.Add(newCourse);
+                                    newCourse.CourseComplete = reader.ReadElementContentAsBoolean();
                                 }
-                                else if (newCourse.CourseColor == "Blue")
+                                if (reader.Name == "CourseDate")
                                 {
-                                    lbComplete.ForeColor = Color.Blue;
-                                    lbComplete.Items.Add(newCourse);
+                                    newCourse.CourseDate = reader.ReadElementContentAsString();
+                                }
+                                if (reader.Name == "CourseColor")
+                                {
+                                    newCourse.CourseColor = reader.ReadElementContentAsString();
+                                }
+
+                                if (newCourse.CourseComplete == true)
+                                {
+                                    if (newCourse.CourseColor == "Red")
+                                    {
+                                        lbComplete.ForeColor = Color.Red;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
+                                    else if (newCourse.CourseColor == "Blue")
+                                    {
+                                        lbComplete.ForeColor = Color.Blue;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
+                                    else
+                                    {
+                                        lbComplete.ForeColor = default;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
                                 }
                                 else
                                 {
-                                    lbComplete.ForeColor = default;
-                                    lbComplete.Items.Add(newCourse);
-                                }
-                            }
-                            else
-                            {
-                                if (newCourse.CourseColor == "Red")
-                                {
-                                    lbNotTaken.ForeColor = Color.Red;
-                                    lbNotTaken.Items.Add(newCourse);
-                                }
-                                else if (newCourse.CourseColor == "Blue")
-                                {
-                                    lbNotTaken.ForeColor = Color.Blue;
-                                    lbNotTaken.Items.Add(newCourse);
-                                }
-                                else
-                                {
-                                    lbNotTaken.ForeColor = default;
-                                    lbNotTaken.Items.Add(newCourse);
+                                    if (newCourse.CourseColor == "Red")
+                                    {
+                                        lbNotTaken.ForeColor = Color.Red;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
+                                    else if (newCourse.CourseColor == "Blue")
+                                    {
+                                        lbNotTaken.ForeColor = Color.Blue;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
+                                    else
+                                    {
+                                        lbNotTaken.ForeColor = default;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
                                 }
                             }
                         }
@@ -487,13 +482,19 @@ namespace JeanaiRoberts_CE01
                         {
 
                         }
+
+                        
                     }
                 }
             }
         }
 
-        // Methods
+        void HandleSaveAsTXT(object sender, EventArgs e)
+        {
 
+        }
+
+        // Methods
         private void MoveItem(ListBox lstfrm, ListBox lstto)
         {
             while (lstfrm.SelectedItems.Count > 0)
@@ -501,6 +502,46 @@ namespace JeanaiRoberts_CE01
                 Course course = (Course)lstfrm.SelectedItems[0];
                 lstto.Items.Add(course);
                 lstfrm.Items.Remove(course);
+            }
+        }
+
+        private void AddListBox(Course newCourse)
+        {
+            if (newCourse.CourseComplete == true)
+            {
+                if (newCourse.CourseColor == "Red")
+                {
+                    lbComplete.ForeColor = Color.Red;
+                    lbComplete.Items.Add(newCourse);
+                }
+                else if (newCourse.CourseColor == "Blue")
+                {
+                    lbComplete.ForeColor = Color.Blue;
+                    lbComplete.Items.Add(newCourse);
+                }
+                else
+                {
+                    lbComplete.ForeColor = default;
+                    lbComplete.Items.Add(newCourse);
+                }
+            }
+            else
+            {
+                if (newCourse.CourseColor == "Red")
+                {
+                    lbNotTaken.ForeColor = Color.Red;
+                    lbNotTaken.Items.Add(newCourse);
+                }
+                else if (newCourse.CourseColor == "Blue")
+                {
+                    lbNotTaken.ForeColor = Color.Blue;
+                    lbNotTaken.Items.Add(newCourse);
+                }
+                else
+                {
+                    lbNotTaken.ForeColor = default;
+                    lbNotTaken.Items.Add(newCourse);
+                }
             }
         }
     }
