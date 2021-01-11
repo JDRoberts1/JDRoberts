@@ -17,6 +17,7 @@ namespace JeanaiRoberts_CE01
         public EventHandler DisplaySelectedItem;
         public EventHandler SaveXML;
         public EventHandler LoadXML;
+        Course newCourse;
 
         public Form1()
         {
@@ -43,6 +44,8 @@ namespace JeanaiRoberts_CE01
             movieInput.AddToListBox += new EventHandler(HandleAddToList);
             DisplaySelectedItem += new EventHandler(movieInput.HandleDisplay);
             movieInput.ModifyCourse += new EventHandler<ModifyCourseEventArgs>(HandleModifyObject);
+            SaveXML += new EventHandler(HandleSaveXML);
+            LoadXML += new EventHandler(HandleLoadXML);
         }
 
         
@@ -261,30 +264,38 @@ namespace JeanaiRoberts_CE01
 
                 using (XmlWriter writer = XmlWriter.Create(dlg.FileName, settings))
                 {
-                    writer.WriteStartElement("Courses Complete");
+                    writer.WriteStartElement("CourseList");
 
                     if(lbComplete.Items.Count > 0)
                     {
-                        foreach(Course c in lbComplete.Items)
+                        writer.WriteStartElement("CoursesComplete");
+
+                        foreach (Course c in lbComplete.Items)
                         {
-                            writer.WriteElementString("Course Name:", c.CourseName);
-                            writer.WriteElementString("Course Complete:", c.CourseComplete.ToString());
-                            writer.WriteElementString("Course Date", c.CourseDate);
-                            writer.WriteElementString("Course Color", c.CourseColor );
+                            writer.WriteElementString("CourseName", c.CourseName);
+                            writer.WriteElementString("CourseComplete", c.CourseComplete.ToString());
+                            writer.WriteElementString("CourseDate", c.CourseDate);
+                            writer.WriteElementString("CourseColor", c.CourseColor );
                             writer.WriteEndElement();
                         }
+
+                        writer.WriteEndElement();
                     }
 
                     if(lbNotTaken.Items.Count > 0)
                     {
-                        foreach(Course c in lbNotTaken.Items)
+                        writer.WriteStartElement("Non-CompleteCourses");
+
+                        foreach (Course c in lbNotTaken.Items)
                         {
-                            writer.WriteElementString("Course Name:", c.CourseName);
-                            writer.WriteElementString("Course Complete:", c.CourseComplete.ToString());
+                            writer.WriteElementString("Course Name", c.CourseName);
+                            writer.WriteElementString("Course Complete", c.CourseComplete.ToString());
                             writer.WriteElementString("Course Date", c.CourseDate);
                             writer.WriteElementString("Course Color", c.CourseColor);
                             writer.WriteEndElement();
                         }
+
+                        writer.WriteEndElement();
                     }
 
                     writer.WriteEndElement();
@@ -294,7 +305,76 @@ namespace JeanaiRoberts_CE01
 
         void HandleLoadXML(object sender, EventArgs e)
         {
+            OpenFileDialog dlg = new OpenFileDialog();
 
+            if(DialogResult.OK == dlg.ShowDialog())
+            {
+                XmlReaderSettings rSettings = new XmlReaderSettings();
+                rSettings.ConformanceLevel = ConformanceLevel.Document;
+
+                rSettings.IgnoreComments = true;
+                rSettings.IgnoreWhitespace = true;
+
+                using(XmlReader reader = XmlReader.Create(dlg.FileName, rSettings))
+                {
+                    reader.MoveToContent();
+
+                    if(reader.Name != "CourseList")
+                    {
+                        MessageBox.Show("Please select a proper file.");
+                        return;
+                    }
+
+                    while (reader.Read())
+                    {
+                        if (reader.Name == "CourseName" && reader.IsStartElement())
+                        {
+                            newCourse = new Course();
+                            newCourse.CourseName = reader.ReadElementContentAsString("CourseName", "");
+                            newCourse.CourseName = reader.ReadElementContentAsString("CourseComplete", "");
+                            newCourse.CourseName = reader.ReadElementContentAsString("CourseDate", "");
+                            newCourse.CourseName = reader.ReadElementContentAsString("CourseColor", "");
+
+                            if (newCourse.CourseComplete != true)
+                            {
+                                if (newCourse.CourseColor == "Red")
+                                {
+                                    lbNotTaken.ForeColor = Color.Red;
+                                    lbNotTaken.Items.Add(newCourse);
+                                }
+                                else if (newCourse.CourseColor == "Blue")
+                                {
+                                    lbNotTaken.ForeColor = Color.Blue;
+                                    lbNotTaken.Items.Add(newCourse);
+                                }
+                                else
+                                {
+                                    lbNotTaken.ForeColor = default;
+                                    lbNotTaken.Items.Add(newCourse);
+                                }
+                            }
+                            else
+                            {
+                                if (newCourse.CourseColor == "Red")
+                                {
+                                    lbComplete.ForeColor = Color.Red;
+                                    lbComplete.Items.Add(newCourse);
+                                }
+                                else if (newCourse.CourseColor == "Blue")
+                                {
+                                    lbComplete.ForeColor = Color.Blue;
+                                    lbComplete.Items.Add(newCourse);
+                                }
+                                else
+                                {
+                                    lbComplete.ForeColor = default;
+                                    lbComplete.Items.Add(newCourse.ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // Methods
@@ -311,7 +391,26 @@ namespace JeanaiRoberts_CE01
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (SaveXML != null)
+            {
+                SaveXML(sender, new EventArgs());
+            }
+        }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (SaveXML != null)
+            {
+                SaveXML(sender, new EventArgs());
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (LoadXML != null)
+            {
+                LoadXML(sender, new EventArgs());
+            }
         }
     }
 }

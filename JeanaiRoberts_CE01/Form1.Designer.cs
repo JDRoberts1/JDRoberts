@@ -45,6 +45,7 @@ namespace JeanaiRoberts_CE01
             this.lbComplete = new System.Windows.Forms.ListBox();
             this.bttnMove = new System.Windows.Forms.Button();
             this.bttnAdd = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbNotComplete.SuspendLayout();
@@ -80,6 +81,7 @@ namespace JeanaiRoberts_CE01
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -99,14 +101,14 @@ namespace JeanaiRoberts_CE01
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(280, 44);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(280, 44);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // groupBox1
@@ -205,6 +207,10 @@ namespace JeanaiRoberts_CE01
             this.bttnAdd.UseVisualStyleBackColor = true;
             this.bttnAdd.Click += new System.EventHandler(this.bttnAdd_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -212,11 +218,12 @@ namespace JeanaiRoberts_CE01
             this.AutoScroll = true;
             this.BackgroundImage = global::JeanaiRoberts_CE01.Properties.Resources.iPhone7Image__1_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(661, 1348);
+            this.ClientSize = new System.Drawing.Size(661, 1382);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -245,6 +252,7 @@ namespace JeanaiRoberts_CE01
         private System.Windows.Forms.ListBox lbComplete;
         private System.Windows.Forms.Button bttnMove;
         private System.Windows.Forms.Button bttnAdd;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
