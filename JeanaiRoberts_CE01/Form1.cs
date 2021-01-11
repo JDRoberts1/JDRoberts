@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace JeanaiRoberts_CE01
 {
@@ -14,6 +15,8 @@ namespace JeanaiRoberts_CE01
     {
         UserInput movieInput = new UserInput();
         public EventHandler DisplaySelectedItem;
+        public EventHandler SaveXML;
+        public EventHandler LoadXML;
 
         public Form1()
         {
@@ -25,9 +28,14 @@ namespace JeanaiRoberts_CE01
 
         private void bttnAdd_Click(object sender, EventArgs e)
         {
+            
+            if (movieInput == null)
+            {
+                movieInput = new UserInput();
+            }
+
             movieInput.AddButton();
             movieInput.ShowDialog();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,45 +50,74 @@ namespace JeanaiRoberts_CE01
         {
             if(lbComplete.SelectedItem != null)
             {
-                ((Course)lbComplete.SelectedItem).CourseComplete = false;
-
                 if (((Course)lbComplete.SelectedItem).CourseColor == "Red")
                 {
                     lbNotTaken.ForeColor = Color.Red;
-                    MoveItem(lbComplete, lbNotTaken);
                 }
                 else if (((Course)lbComplete.SelectedItem).CourseColor == "Blue")
                 {
                     lbNotTaken.ForeColor = Color.Blue;
-                    MoveItem(lbComplete, lbNotTaken);
                 }
                 else
                 {
                     lbNotTaken.ForeColor = default;
-                    MoveItem(lbComplete, lbNotTaken);
                 }
+
+                ((Course)lbComplete.SelectedItem).CourseComplete = false;
+                MoveItem(lbComplete, lbNotTaken);
             }
 
             if(lbNotTaken.SelectedItem != null)
             {
-                ((Course)lbNotTaken.SelectedItem).CourseComplete = true;
-
                 if (((Course)lbNotTaken.SelectedItem).CourseColor == "Red")
                 {
                     lbComplete.ForeColor = Color.Red;
-                    MoveItem(lbNotTaken, lbComplete);
                 }
                 else if (((Course)lbNotTaken.SelectedItem).CourseColor == "Blue")
                 {
                     lbComplete.ForeColor = Color.Blue;
-                    MoveItem(lbNotTaken, lbComplete);
                 }
                 else
                 {
                     lbComplete.ForeColor = default;
-                    MoveItem(lbNotTaken, lbComplete);
                 }
+
+                ((Course)lbNotTaken.SelectedItem).CourseComplete = true;
+                MoveItem(lbNotTaken, lbComplete);
             }
+        }
+
+        private void bttnDelete_Click(object sender, EventArgs e)
+        {
+            lbComplete.Items.Remove(lbComplete.SelectedItem);
+            lbNotTaken.Items.Remove(lbNotTaken.SelectedItem);
+        }
+
+        private void bttnEdit_Click(object sender, EventArgs e)
+        {
+            if(movieInput == null)
+            {
+                movieInput = new UserInput();
+            }
+
+            if (lbComplete.SelectedItem != null)
+            {
+                sender = ((Course)lbComplete.SelectedItem);
+            }
+
+            if (lbNotTaken.SelectedItem != null)
+            {
+                sender = ((Course)lbNotTaken.SelectedItem);
+            }
+
+
+            if (DisplaySelectedItem != null)
+            {
+                DisplaySelectedItem(sender, new EventArgs());
+            }
+
+            movieInput.SaveButton();
+            movieInput.ShowDialog();
         }
 
         // Handler Methods
@@ -165,7 +202,20 @@ namespace JeanaiRoberts_CE01
                 ((Course)lbComplete.SelectedItem).CourseDate = c.CourseDate;
                 ((Course)lbComplete.SelectedItem).CourseColor = c.CourseColor;
 
-                if(c.CourseComplete != true)
+                if (c.CourseColor == "Red")
+                {
+                    lbNotTaken.ForeColor = Color.Red;
+                }
+                else if (c.CourseColor == "Blue")
+                {
+                    lbNotTaken.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    lbNotTaken.ForeColor = default;
+                }
+
+                if (c.CourseComplete != true)
                 {
                     MoveItem(lbComplete, lbNotTaken);
                 }
@@ -177,11 +227,74 @@ namespace JeanaiRoberts_CE01
                 ((Course)lbNotTaken.SelectedItem).CourseDate = c.CourseDate;
                 ((Course)lbNotTaken.SelectedItem).CourseColor = c.CourseColor;
 
+                if (c.CourseColor == "Red")
+                {
+                    lbNotTaken.ForeColor = Color.Red;
+                }
+                else if (c.CourseColor == "Blue")
+                {
+                    lbNotTaken.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    lbNotTaken.ForeColor = default;
+                }
+
                 if (c.CourseComplete != false)
                 {
                     MoveItem(lbNotTaken, lbComplete);
                 }
             }
+        }
+
+        void HandleSaveXML(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.DefaultExt = "xml";
+
+            if(DialogResult.OK == dlg.ShowDialog())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Document;
+
+                settings.Indent = true;
+
+                using (XmlWriter writer = XmlWriter.Create(dlg.FileName, settings))
+                {
+                    writer.WriteStartElement("Courses Complete");
+
+                    if(lbComplete.Items.Count > 0)
+                    {
+                        foreach(Course c in lbComplete.Items)
+                        {
+                            writer.WriteElementString("Course Name:", c.CourseName);
+                            writer.WriteElementString("Course Complete:", c.CourseComplete.ToString());
+                            writer.WriteElementString("Course Date", c.CourseDate);
+                            writer.WriteElementString("Course Color", c.CourseColor );
+                            writer.WriteEndElement();
+                        }
+                    }
+
+                    if(lbNotTaken.Items.Count > 0)
+                    {
+                        foreach(Course c in lbNotTaken.Items)
+                        {
+                            writer.WriteElementString("Course Name:", c.CourseName);
+                            writer.WriteElementString("Course Complete:", c.CourseComplete.ToString());
+                            writer.WriteElementString("Course Date", c.CourseDate);
+                            writer.WriteElementString("Course Color", c.CourseColor);
+                            writer.WriteEndElement();
+                        }
+                    }
+
+                    writer.WriteEndElement();
+                }
+            }
+        }
+
+        void HandleLoadXML(object sender, EventArgs e)
+        {
+
         }
 
         // Methods
@@ -196,33 +309,9 @@ namespace JeanaiRoberts_CE01
             }
         }
 
-        private void bttnDelete_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lbComplete.Items.Remove(lbComplete.SelectedItem);
-            lbNotTaken.Items.Remove(lbNotTaken.SelectedItem);
-        }
 
-        private void bttnEdit_Click(object sender, EventArgs e)
-        {
-            movieInput.SaveButton();
-            movieInput.Show();
-
-            if (lbComplete.SelectedItem != null)
-            {
-                sender = ((Course)lbComplete.SelectedItem);
-            }
-
-            if(lbNotTaken.SelectedItem != null)
-            {
-                sender = ((Course)lbNotTaken.SelectedItem);
-            }
-
-
-            if (DisplaySelectedItem != null)
-            {
-                DisplaySelectedItem(sender, new EventArgs());
-            }
-            
         }
     }
 }

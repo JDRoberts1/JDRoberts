@@ -155,12 +155,14 @@ namespace JeanaiRoberts_CE01
                 ModifyCourse(sender, new ModifyCourseEventArgs(newCourse));
             }
 
-            
-        }
+            ClearInput();
 
+            this.Close();
+        }
+        
         private void UserInput_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            ClearInput();
         }
     }
 }
