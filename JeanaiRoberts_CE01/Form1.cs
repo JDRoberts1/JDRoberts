@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -214,7 +215,10 @@ namespace JeanaiRoberts_CE01
 
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if(PrintList != null)
+            {
+                PrintList(sender, new EventArgs());
+            }
         }
 
         // Handler Methods
@@ -377,7 +381,7 @@ namespace JeanaiRoberts_CE01
 
                     if (lbNotTaken.Items.Count > 0)
                     {
-                        writer.WriteStartElement("CompleteList");
+                        writer.WriteStartElement("NonCompleteList");
 
                         foreach (Course c in lbNotTaken.Items)
                         {
@@ -440,42 +444,7 @@ namespace JeanaiRoberts_CE01
                                     newCourse.CourseColor = reader.ReadElementContentAsString();
                                 }
 
-                                if (newCourse.CourseComplete == true)
-                                {
-                                    if (newCourse.CourseColor == "Red")
-                                    {
-                                        lbComplete.ForeColor = Color.Red;
-                                        lbComplete.Items.Add(newCourse);
-                                    }
-                                    else if (newCourse.CourseColor == "Blue")
-                                    {
-                                        lbComplete.ForeColor = Color.Blue;
-                                        lbComplete.Items.Add(newCourse);
-                                    }
-                                    else
-                                    {
-                                        lbComplete.ForeColor = default;
-                                        lbComplete.Items.Add(newCourse);
-                                    }
-                                }
-                                else
-                                {
-                                    if (newCourse.CourseColor == "Red")
-                                    {
-                                        lbNotTaken.ForeColor = Color.Red;
-                                        lbNotTaken.Items.Add(newCourse);
-                                    }
-                                    else if (newCourse.CourseColor == "Blue")
-                                    {
-                                        lbNotTaken.ForeColor = Color.Blue;
-                                        lbNotTaken.Items.Add(newCourse);
-                                    }
-                                    else
-                                    {
-                                        lbNotTaken.ForeColor = default;
-                                        lbNotTaken.Items.Add(newCourse);
-                                    }
-                                }
+                                AddListBox(newCourse);
                             }
                         }
                         else
@@ -491,7 +460,33 @@ namespace JeanaiRoberts_CE01
 
         void HandleSaveAsTXT(object sender, EventArgs e)
         {
+            using(SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.DefaultExt = "txt";
 
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        sw.WriteLine("Course List");
+                        sw.WriteLine("Complete Courses");
+
+                        foreach(Course c in lbComplete.Items)
+                        {
+                            sw.WriteLine(c.ToString());
+                        }
+
+                        sw.WriteLine("NonComplete Courses");
+
+                        foreach (Course c in lbNotTaken.Items)
+                        {
+                            sw.WriteLine(c.ToString());
+                        }
+
+                        sw.Close();
+                    }
+                }
+            }
         }
 
         // Methods
