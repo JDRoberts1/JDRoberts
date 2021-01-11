@@ -103,6 +103,12 @@ namespace JeanaiRoberts_CE01
             btnSave.Visible = false;
         }
 
+        public void NoButton()
+        {
+            btnAdd.Visible = false;
+            btnSave.Visible = false;
+        }
+
         public void HandleDisplay(object sender, EventArgs e)
         {
             newCourse = (Course)sender;

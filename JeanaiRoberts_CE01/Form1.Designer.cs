@@ -60,7 +60,7 @@ namespace JeanaiRoberts_CE01
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(605, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -156,6 +156,8 @@ namespace JeanaiRoberts_CE01
             this.lbNotTaken.Name = "lbNotTaken";
             this.lbNotTaken.Size = new System.Drawing.Size(587, 327);
             this.lbNotTaken.TabIndex = 0;
+            this.lbNotTaken.SelectedIndexChanged += new System.EventHandler(this.lbNotTaken_SelectedIndexChanged);
+            this.lbNotTaken.DoubleClick += new System.EventHandler(this.lbNotTaken_DoubleClick);
             // 
             // bttnEdit
             // 
@@ -186,6 +188,8 @@ namespace JeanaiRoberts_CE01
             this.lbComplete.Name = "lbComplete";
             this.lbComplete.Size = new System.Drawing.Size(581, 324);
             this.lbComplete.TabIndex = 0;
+            this.lbComplete.SelectedIndexChanged += new System.EventHandler(this.lbComplete_SelectedIndexChanged);
+            this.lbComplete.DoubleClick += new System.EventHandler(this.lbComplete_DoubleClick);
             // 
             // bttnMove
             // 
