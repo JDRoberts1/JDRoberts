@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JeanaiRoberts_CE01
 {
+    // Class to build course object
     public class Course
     {
         string courseName;

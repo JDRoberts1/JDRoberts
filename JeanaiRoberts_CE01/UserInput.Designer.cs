@@ -164,11 +164,11 @@ namespace JeanaiRoberts_CE01
             this.AutoScroll = true;
             this.BackgroundImage = global::JeanaiRoberts_CE01.Properties.Resources.iPhone7Image__1_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(661, 1348);
+            this.ClientSize = new System.Drawing.Size(661, 1382);
             this.Controls.Add(this.classInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "UserInput";
-            this.Text = "Movie Input";
+            this.Text = "Course Input";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserInput_FormClosed);
             this.classInput.ResumeLayout(false);
             this.classInput.PerformLayout();

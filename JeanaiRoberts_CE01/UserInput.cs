@@ -14,7 +14,10 @@ namespace JeanaiRoberts_CE01
     {
         
         Course newCourse;
+        // Custom event handler to add item to list box
         public EventHandler AddToListBox;
+
+        // Custom event handler to edit selected item
         public EventHandler<ModifyCourseEventArgs> ModifyCourse;
         
 
@@ -52,6 +55,7 @@ namespace JeanaiRoberts_CE01
 
         }
 
+        // Method to clear alll input fields
         void ClearInput()
         {
             txtClassName.Clear();
@@ -61,6 +65,7 @@ namespace JeanaiRoberts_CE01
             rdoBlue.Checked = false;
         }
 
+        // Ability to enter items into a form that in turn sends that data back to the appropriate list
         private void btnAdd_Click(object sender, EventArgs e)
         {
             newCourse = new Course();
@@ -91,24 +96,28 @@ namespace JeanaiRoberts_CE01
             ClearInput();
         }
         
+        // Method to hide Add button and Show Save button
         public void SaveButton()
         {
             btnAdd.Visible = false;
             btnSave.Visible = true;
         }
 
+        // Method to show Add button and hide Save button
         public void AddButton()
         {
             btnAdd.Visible = true;
             btnSave.Visible = false;
         }
 
+        // Method to hide both Add and Save button
         public void NoButton()
         {
             btnAdd.Visible = false;
             btnSave.Visible = false;
         }
 
+        // Handler method to display selected item
         public void HandleDisplay(object sender, EventArgs e)
         {
             newCourse = (Course)sender;
@@ -134,6 +143,7 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Ability for the user to edit an individual item from either column.
         private void btnSave_Click(object sender, EventArgs e)
         {
             newCourse = new Course();
@@ -166,6 +176,7 @@ namespace JeanaiRoberts_CE01
             this.Close();
         }
         
+        // Clears the input when the form is closed
         private void UserInput_FormClosed(object sender, FormClosedEventArgs e)
         {
             ClearInput();

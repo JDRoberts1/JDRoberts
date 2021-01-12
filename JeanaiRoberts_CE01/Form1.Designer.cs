@@ -60,7 +60,7 @@ namespace JeanaiRoberts_CE01
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(605, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -72,7 +72,7 @@ namespace JeanaiRoberts_CE01
             this.printToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // loadToolStripMenuItem

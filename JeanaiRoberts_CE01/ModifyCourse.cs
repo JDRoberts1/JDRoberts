@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JeanaiRoberts_CE01
 {
+    // Class to edit course
     public class ModifyCourseEventArgs : EventArgs
     {
         Course modifyCourse;

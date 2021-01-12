@@ -14,7 +14,7 @@ namespace JeanaiRoberts_CE01
 {
     public partial class Form1 : Form
     {
-        UserInput movieInput = new UserInput();
+        UserInput courseInput = new UserInput();
         public EventHandler DisplaySelectedItem;
         public EventHandler SaveXML;
         public EventHandler LoadXML;
@@ -29,29 +29,31 @@ namespace JeanaiRoberts_CE01
 
         // Events
 
+       // Add button displays the Cousre input form with Add button
         private void bttnAdd_Click(object sender, EventArgs e)
         {
             
-            if (movieInput == null)
+            if (courseInput == null)
             {
-                movieInput = new UserInput();
+                courseInput = new UserInput();
             }
 
-            movieInput.AddButton();
-            movieInput.ShowDialog();
+            courseInput.AddButton();
+            courseInput.ShowDialog();
         }
 
+        // Load event to register the custom events and arguments
         private void Form1_Load(object sender, EventArgs e)
         {
-            movieInput.AddToListBox += new EventHandler(HandleAddToList);
-            DisplaySelectedItem += new EventHandler(movieInput.HandleDisplay);
-            movieInput.ModifyCourse += new EventHandler<ModifyCourseEventArgs>(HandleModifyObject);
+            courseInput.AddToListBox += new EventHandler(HandleAddToList);
+            DisplaySelectedItem += new EventHandler(courseInput.HandleDisplay);
+            courseInput.ModifyCourse += new EventHandler<ModifyCourseEventArgs>(HandleModifyObject);
             SaveXML += new EventHandler(HandleSaveXML);
             LoadXML += new EventHandler(HandleLoadXML);
             PrintList += new EventHandler(HandleSaveAsTXT);
         }
 
-        
+        // Ability for the user to move an item between the columns.
         private void bttnMove_Click(object sender, EventArgs e)
         {
             if(lbComplete.SelectedItem != null)
@@ -93,17 +95,19 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Ability for the user to delete an individual item from both columns.
         private void bttnDelete_Click(object sender, EventArgs e)
         {
             lbComplete.Items.Remove(lbComplete.SelectedItem);
             lbNotTaken.Items.Remove(lbNotTaken.SelectedItem);
         }
 
+        // Displays the Course Input form with Save button
         private void bttnEdit_Click(object sender, EventArgs e)
         {
-            if(movieInput == null)
+            if(courseInput == null)
             {
-                movieInput = new UserInput();
+                courseInput = new UserInput();
             }
 
             if (lbComplete.SelectedItem != null)
@@ -122,10 +126,11 @@ namespace JeanaiRoberts_CE01
                 DisplaySelectedItem(sender, new EventArgs());
             }
 
-            movieInput.SaveButton();
-            movieInput.ShowDialog();
+            courseInput.SaveButton();
+            courseInput.ShowDialog();
         }
 
+        // Ability for the user to save the list via a Menu option
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (SaveXML != null)
@@ -134,6 +139,7 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Ability for the app to save the current state upon Form close. 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (SaveXML != null)
@@ -142,6 +148,7 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (LoadXML != null)
@@ -150,6 +157,7 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Ability to load the saved list back into the application
         private void lbNotTaken_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(lbNotTaken.SelectedItem != null)
@@ -158,6 +166,7 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Removes selection from Not Taken listbox if Comeplete listbox is selected
         private void lbComplete_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(lbComplete.SelectedItem != null)
@@ -166,11 +175,12 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Removes selection form Comeplete listbox if Not Taken listbox is selected
         private void lbNotTaken_DoubleClick(object sender, EventArgs e)
         {
-            if (movieInput == null)
+            if (courseInput == null)
             {
-                movieInput = new UserInput();
+                courseInput = new UserInput();
             }
 
             if (lbNotTaken.SelectedItem != null)
@@ -183,15 +193,16 @@ namespace JeanaiRoberts_CE01
                 DisplaySelectedItem(sender, new EventArgs());
             }
 
-            movieInput.NoButton();
-            movieInput.ShowDialog();
+            courseInput.NoButton();
+            courseInput.ShowDialog();
         }
 
+        // Double click should populate item with no save button.
         private void lbComplete_DoubleClick(object sender, EventArgs e)
         {
-            if (movieInput == null)
+            if (courseInput == null)
             {
-                movieInput = new UserInput();
+                courseInput = new UserInput();
             }
 
             if (lbComplete.SelectedItem != null)
@@ -204,15 +215,17 @@ namespace JeanaiRoberts_CE01
                 DisplaySelectedItem(sender, new EventArgs());
             }
 
-            movieInput.NoButton();
-            movieInput.ShowDialog();
+            courseInput.NoButton();
+            courseInput.ShowDialog();
         }
 
+        // Ability to gracefully quit the application.
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // Ability to save the list in a format that the user can print.
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(PrintList != null)
@@ -421,14 +434,17 @@ namespace JeanaiRoberts_CE01
                         return;
                     }
 
+                    Course newCourse;
+
                     while (reader.Read())
                     {
+                        newCourse = new Course();
+
                         if (reader.Name == "CourseName" && reader.IsStartElement())
                         {
+                          
                             if (reader.Name == "CourseName")
                             {
-                                Course newCourse = new Course();
-
                                 newCourse.CourseName = reader.ReadElementContentAsString();
 
                                 if (reader.Name == "CourseComplete")
@@ -444,7 +460,42 @@ namespace JeanaiRoberts_CE01
                                     newCourse.CourseColor = reader.ReadElementContentAsString();
                                 }
 
-                                AddListBox(newCourse);
+                                if (newCourse.CourseComplete == true)
+                                {
+                                    if (newCourse.CourseColor == "Red")
+                                    {
+                                        lbComplete.ForeColor = Color.Red;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
+                                    else if (newCourse.CourseColor == "Blue")
+                                    {
+                                        lbComplete.ForeColor = Color.Blue;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
+                                    else
+                                    {
+                                        lbComplete.ForeColor = default;
+                                        lbComplete.Items.Add(newCourse);
+                                    }
+                                }
+                                else
+                                {
+                                    if (newCourse.CourseColor == "Red")
+                                    {
+                                        lbNotTaken.ForeColor = Color.Red;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
+                                    else if (newCourse.CourseColor == "Blue")
+                                    {
+                                        lbNotTaken.ForeColor = Color.Blue;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
+                                    else
+                                    {
+                                        lbNotTaken.ForeColor = default;
+                                        lbNotTaken.Items.Add(newCourse);
+                                    }
+                                }
                             }
                         }
                         else
@@ -500,6 +551,8 @@ namespace JeanaiRoberts_CE01
             }
         }
 
+        // Method to diplay Listbox item in selected color
+        // The ability for the user to select the text color (RED or BLUE).
         private void AddListBox(Course newCourse)
         {
             if (newCourse.CourseComplete == true)
