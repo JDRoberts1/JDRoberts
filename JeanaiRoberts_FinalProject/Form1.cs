@@ -7,21 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using RestSharp;
+using System.Xml;
+using Newtonsoft.Json.Linq;
 
 namespace JeanaiRoberts_FinalProject
 {
     public partial class Form1 : Form
     {
+
+        WebClient apiConnection = new WebClient();
+
+        string API = "http://www.omdbapi.com/?apikey=1a2565db&t=";
+
+        string APIEndPoint;
+
+        //string endAPI = "";
+
         public Form1()
         {
             InitializeComponent();
             HandleClientWindowSize();
         }
 
-        void HandleClientWindowSize()
-
+        private void BuildAPI()
         {
+            string sTitle = ReturnTitle();
 
+            APIEndPoint = API + sTitle;
+
+            // debug
+            textBox7.Text = APIEndPoint;
+        }
+        
+        private string ReturnTitle()
+        {
+            string apiTitle = textBox1.Text.Replace(" ", "-");
+
+            return apiTitle;
+
+        }
+
+        void HandleClientWindowSize()
+        {
             //Modify ONLY these float values
 
             float HeightValueToChange = 1.4f;
@@ -42,10 +71,46 @@ namespace JeanaiRoberts_FinalProject
 
                 width = Size.Width;
 
-            this.Size = new Size(width, height);
+            //this.Size = new Size(width, height);
 
-            //this.Size = new Size(376, 720);
+            this.Size = new Size(376, 720);
 
+        }
+
+        private void ReadTheJSONData()
+        {
+            // the var dataType lets the application decide what dataType to use when the code runs
+            var apiData = apiConnection.DownloadString(APIEndPoint);
+
+            // DEBUG: Messagebox to display apiData string
+            MessageBox.Show("The string: \n" + apiData);
+
+            // parse the datastring to a JObject
+            JObject o = JObject.Parse(apiData);
+
+            // string variable to hold specific data from the JSON object 
+            // The second set of square brackets indicates that we want to see the very first element in the array of JSON Data
+            textBox2.Text = o["Title"].ToString();
+            textBox3.Text = o["Released"].ToString();
+            textBox4.Text = o["Rated"].ToString();
+            textBox8.Text = o["Runtime"].ToString();
+            textBox5.Text = o["Genre"].ToString();
+            textBox6.Text = o["Plot"].ToString();
+
+            // DEBUG: MESSAGEBOX to show the object
+            //MessageBox.Show("The JObject:\n" + o.ToString());
+
+            // DEBUG : Messagebox to display what is contained within the results key
+            //MessageBox.Show(specifics);
+
+            textBox1.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BuildAPI();
+            ReadTheJSONData();
+            
         }
     }
 }
