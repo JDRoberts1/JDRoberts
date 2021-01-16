@@ -1,0 +1,10 @@
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\bin\Debug\JeanaiRoberts_CE02.exe.config
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\bin\Debug\JeanaiRoberts_CE02.exe
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\bin\Debug\JeanaiRoberts_CE02.pdb
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.csprojAssemblyReference.cache
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.Form1.resources
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.Properties.Resources.resources
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.csproj.GenerateResource.cache
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.csproj.CoreCompileInputs.cache
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.exe
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_CE02\obj\Debug\JeanaiRoberts_CE02.pdb

@@ -19,7 +19,6 @@ namespace JeanaiRoberts_CE02
         }
 
         void HandleClientWindowSize()
-
         {
 
             //Modify ONLY these float values
@@ -42,10 +41,12 @@ namespace JeanaiRoberts_CE02
 
                 width = Size.Width;
 
-            this.Size = new Size(width, height);
+            //this.Size = new Size(width, height);
 
-            //this.Size = new Size(376, 720);
+            this.Size = new Size(376, 720);
 
         }
+
+        
     }
 }
