@@ -53,8 +53,9 @@ namespace JeanaiRoberts_CE02
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.Series.SuspendLayout();
@@ -63,9 +64,10 @@ namespace JeanaiRoberts_CE02
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.btnPrevious);
             this.groupBox1.Controls.Add(this.btnNext);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -220,7 +222,7 @@ namespace JeanaiRoberts_CE02
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(598, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(598, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -290,15 +292,17 @@ namespace JeanaiRoberts_CE02
             this.btnAdd.TabIndex = 43;
             this.btnAdd.Text = "New Movie";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button4
+            // btnPrevious
             // 
-            this.button4.Location = new System.Drawing.Point(26, 600);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(207, 41);
-            this.button4.TabIndex = 42;
-            this.button4.Text = "Previous";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnPrevious.Location = new System.Drawing.Point(26, 600);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(207, 41);
+            this.btnPrevious.TabIndex = 42;
+            this.btnPrevious.Text = "Previous";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnNext
             // 
@@ -308,6 +312,18 @@ namespace JeanaiRoberts_CE02
             this.btnNext.TabIndex = 41;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(26, 798);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(207, 41);
+            this.btnSave.TabIndex = 45;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Visible = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Form1
             // 
@@ -354,9 +370,10 @@ namespace JeanaiRoberts_CE02
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 

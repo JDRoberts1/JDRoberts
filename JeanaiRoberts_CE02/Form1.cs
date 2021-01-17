@@ -19,6 +19,8 @@ namespace JeanaiRoberts_CE02
         int row;
         MovieObject newMovie;
         ListViewItem lvi;
+
+        public EventHandler ViewMovie;
            
         public Form1()
         {
@@ -186,6 +188,78 @@ namespace JeanaiRoberts_CE02
                 
             }
         }
-        
+
+        void ClearInput()
+        {
+            txtTitle.Clear();
+            numYear.Value = 2000;
+            cmbPublisher.Text = null;
+            txtAuthor.Clear();
+            cmbGenre.Text = null;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ClearInput();
+            btnSave.Visible = true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            newMovie = new MovieObject();
+
+            while (String.IsNullOrWhiteSpace(txtTitle.Text))
+            {
+                MessageBox.Show("Please enter a vaild input!");
+                newMovie.Title = txtTitle.Text;
+            }
+            
+
+
+
+            newMovie.Year = numYear.Value;
+            newMovie.Publisher = cmbGenre.Text;
+            newMovie.Author = txtAuthor.Text;
+            newMovie.Genre = cmbGenre.Text;
+
+            lvi = new ListViewItem();
+            lvi.Tag = newMovie;
+            lvi.ImageIndex = newMovie.Index;
+            lvi.Text = newMovie.ToString();
+
+            lvMovies.Items.Add(lvi);
+
+            
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if(row -1 >= 0)
+            {
+                row--;
+
+                txtTitle.Text = movieData.Rows[row]["Title"].ToString();
+                string yearString = movieData.Rows[row]["YearReleased"].ToString();
+                numYear.Value = Convert.ToDecimal(yearString);
+                cmbPublisher.Text = movieData.Rows[row]["Publisher"].ToString();
+                txtAuthor.Text = movieData.Rows[row]["Author"].ToString();
+                cmbGenre.Text = movieData.Rows[row]["Genre"].ToString();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (row + 1 < movieData.Select().Length)
+            {
+                row++;
+
+                txtTitle.Text = movieData.Rows[row]["Title"].ToString();
+                string yearString = movieData.Rows[row]["YearReleased"].ToString();
+                numYear.Value = Convert.ToDecimal(yearString);
+                cmbPublisher.Text = movieData.Rows[row]["Publisher"].ToString();
+                txtAuthor.Text = movieData.Rows[row]["Author"].ToString();
+                cmbGenre.Text = movieData.Rows[row]["Genre"].ToString();
+            }
+        }
     }
 }
