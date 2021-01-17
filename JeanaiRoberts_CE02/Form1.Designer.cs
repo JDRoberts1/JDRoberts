@@ -43,7 +43,7 @@ namespace JeanaiRoberts_CE02
             this.txtAuthor = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.Series = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvMovies = new System.Windows.Forms.ListView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,9 +79,9 @@ namespace JeanaiRoberts_CE02
             this.groupBox1.Controls.Add(this.txtTitle);
             this.groupBox1.Controls.Add(this.Series);
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Location = new System.Drawing.Point(47, 148);
+            this.groupBox1.Location = new System.Drawing.Point(57, 174);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(573, 877);
+            this.groupBox1.Size = new System.Drawing.Size(604, 993);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -192,23 +192,25 @@ namespace JeanaiRoberts_CE02
             // 
             // Series
             // 
-            this.Series.Controls.Add(this.listView1);
+            this.Series.Controls.Add(this.lvMovies);
             this.Series.Location = new System.Drawing.Point(263, 70);
             this.Series.Name = "Series";
-            this.Series.Size = new System.Drawing.Size(310, 807);
+            this.Series.Size = new System.Drawing.Size(335, 807);
             this.Series.TabIndex = 1;
             this.Series.TabStop = false;
             this.Series.Text = "Series List";
             // 
-            // listView1
+            // lvMovies
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 27);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(304, 777);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvMovies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvMovies.HideSelection = false;
+            this.lvMovies.LargeImageList = this.imageList1;
+            this.lvMovies.Location = new System.Drawing.Point(3, 27);
+            this.lvMovies.Name = "lvMovies";
+            this.lvMovies.Size = new System.Drawing.Size(329, 777);
+            this.lvMovies.SmallImageList = this.imageList1;
+            this.lvMovies.TabIndex = 0;
+            this.lvMovies.UseCompatibleStateImageBehavior = false;
             // 
             // menuStrip1
             // 
@@ -218,7 +220,7 @@ namespace JeanaiRoberts_CE02
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(567, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(598, 42);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -343,7 +345,7 @@ namespace JeanaiRoberts_CE02
         private System.Windows.Forms.TextBox txtAuthor;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.GroupBox Series;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvMovies;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

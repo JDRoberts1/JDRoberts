@@ -12,6 +12,7 @@ namespace JeanaiRoberts_CE02
         decimal mRYear;
         string mPublisher;
         string mAuthor;
+        string mGenre;
         int imgIndex;
 
         public string Title
@@ -40,6 +41,13 @@ namespace JeanaiRoberts_CE02
             get { return mAuthor; }
 
             set { mAuthor = value; }
+        }
+
+        public string Genre
+        {
+            get { return mGenre; }
+
+            set { mGenre = value; }
         }
 
         public int Index
