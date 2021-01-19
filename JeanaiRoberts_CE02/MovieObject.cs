@@ -61,5 +61,10 @@ namespace JeanaiRoberts_CE02
         {
             return $"{Title}";
         }
+
+        public string ToSaveString()
+        {
+            return $"Movie name: {Title}, Year Released: {Year}, Publisher: {Publisher}, Author: {Author}, Genre: {Genre}";
+        }
     }
 }

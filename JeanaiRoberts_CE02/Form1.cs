@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,8 +162,6 @@ namespace JeanaiRoberts_CE02
             btnApply.Visible = true;
             btnCancel.Visible = true;
 
-            row = lvMovies.Items.IndexOf(lvMovies.SelectedItems[0]);
-
             if ( lvMovies.SelectedItems.Count > 0)
             {
                 MovieInfo = (MovieObject)lvMovies.SelectedItems[0].Tag;
@@ -252,6 +251,29 @@ namespace JeanaiRoberts_CE02
         {
             HideBTN();
             MovieInfo = (MovieObject)lvMovies.Items[row].Tag;
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.DefaultExt = "txt";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        sw.WriteLine("Series List");
+
+                        foreach (MovieObject m in lvMovies.Items)
+                        {
+                            sw.WriteLine(m.ToSaveString());
+                        }
+                        
+                        sw.Close();
+                    }
+                }
+            }
         }
 
         // Handlers
@@ -376,7 +398,7 @@ namespace JeanaiRoberts_CE02
             cmd.Parameters.AddWithValue("@Publisher", m.Publisher);
             cmd.Parameters.AddWithValue("@Author", m.Author);
             cmd.Parameters.AddWithValue("@Genre", m.Genre);
-            
+
 
             MySqlDataReader rdr = cmd.ExecuteReader();
 
