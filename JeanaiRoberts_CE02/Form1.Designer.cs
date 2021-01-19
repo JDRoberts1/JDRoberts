@@ -56,6 +56,9 @@ namespace JeanaiRoberts_CE02
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.Series.SuspendLayout();
@@ -64,6 +67,9 @@ namespace JeanaiRoberts_CE02
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCancel);
+            this.groupBox1.Controls.Add(this.btnApply);
+            this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.btnAdd);
@@ -277,18 +283,19 @@ namespace JeanaiRoberts_CE02
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(26, 747);
+            this.btnEdit.Location = new System.Drawing.Point(433, 883);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(207, 41);
+            this.btnEdit.Size = new System.Drawing.Size(161, 41);
             this.btnEdit.TabIndex = 44;
             this.btnEdit.Text = "Edit Movie";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(26, 697);
+            this.btnAdd.Location = new System.Drawing.Point(266, 883);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(207, 41);
+            this.btnAdd.Size = new System.Drawing.Size(161, 41);
             this.btnAdd.TabIndex = 43;
             this.btnAdd.Text = "New Movie";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -296,7 +303,7 @@ namespace JeanaiRoberts_CE02
             // 
             // btnPrevious
             // 
-            this.btnPrevious.Location = new System.Drawing.Point(26, 600);
+            this.btnPrevious.Location = new System.Drawing.Point(26, 589);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(207, 41);
             this.btnPrevious.TabIndex = 42;
@@ -306,7 +313,7 @@ namespace JeanaiRoberts_CE02
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(26, 649);
+            this.btnNext.Location = new System.Drawing.Point(27, 638);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(207, 41);
             this.btnNext.TabIndex = 41;
@@ -316,7 +323,7 @@ namespace JeanaiRoberts_CE02
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(26, 798);
+            this.btnSave.Location = new System.Drawing.Point(27, 786);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(207, 41);
             this.btnSave.TabIndex = 45;
@@ -324,6 +331,38 @@ namespace JeanaiRoberts_CE02
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Visible = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(26, 688);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(207, 41);
+            this.btnDelete.TabIndex = 46;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnApply
+            // 
+            this.btnApply.Location = new System.Drawing.Point(27, 737);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(207, 41);
+            this.btnApply.TabIndex = 47;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Visible = false;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(27, 836);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(207, 41);
+            this.btnCancel.TabIndex = 48;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // Form1
             // 
@@ -337,6 +376,7 @@ namespace JeanaiRoberts_CE02
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
@@ -374,6 +414,9 @@ namespace JeanaiRoberts_CE02
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
 

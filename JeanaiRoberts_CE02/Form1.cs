@@ -21,7 +21,8 @@ namespace JeanaiRoberts_CE02
         ListViewItem lvi;
 
         public EventHandler ViewMovie;
-           
+        public EventHandler<ModifyObjectEventArgs> ModifyObject;
+
         public Form1()
         {
             InitializeComponent();
@@ -90,6 +91,139 @@ namespace JeanaiRoberts_CE02
             }
         }
 
+        // Events
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ClearInput();
+            btnSave.Visible = true;
+            btnCancel.Visible = true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            newMovie = new MovieObject();
+
+            newMovie.Title = txtTitle.Text;
+            newMovie.Year = numYear.Value;
+            newMovie.Publisher = cmbGenre.Text;
+            newMovie.Author = txtAuthor.Text;
+            newMovie.Genre = cmbGenre.Text;
+
+            lvi = new ListViewItem();
+            lvi.Tag = newMovie;
+            lvi.ImageIndex = newMovie.Index;
+            lvi.Text = newMovie.ToString();
+
+            lvMovies.Items.Add(lvi);
+
+            btnSave.Visible = false;
+            btnCancel.Visible = false;
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (row -1 >= 0)
+            {
+                row--;
+
+                MovieInfo = (MovieObject)lvMovies.Items[row].Tag;
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (row + 1 < lvMovies.Items.Count)
+            {
+                row++;
+
+                MovieInfo = (MovieObject)lvMovies.Items[row].Tag;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            btnApply.Visible = true;
+            btnCancel.Visible = true;
+
+            if( lvMovies.SelectedItems.Count > 0)
+            {
+                MovieInfo = (MovieObject)lvMovies.SelectedItems[0].Tag;
+            }
+            else
+            {
+                MovieInfo = (MovieObject)lvMovies.Items[row].Tag;
+            }
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ModifyObject += HandleModifyObject;
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+
+            newMovie = new MovieObject();
+
+            newMovie.Title = txtTitle.Text;
+            newMovie.Year = numYear.Value;
+            newMovie.Publisher = cmbPublisher.Text;
+            newMovie.Author = txtAuthor.Text;
+            newMovie.Genre = cmbGenre.Text;
+
+            if (newMovie.Year == 2001)
+            {
+                newMovie.Index = 0;
+            }
+            else if (newMovie.Year == 2002)
+            {
+                newMovie.Index = 1;
+            }
+            else if (newMovie.Year == 2004)
+            {
+                newMovie.Index = 2;
+            }
+            else if (newMovie.Year == 2005)
+            {
+                newMovie.Index = 3;
+            }
+            else if (newMovie.Year == 2007)
+            {
+                newMovie.Index = 4;
+            }
+            else if (newMovie.Year == 2009)
+            {
+                newMovie.Index = 5;
+            }
+            else if (newMovie.Year == 2010)
+            {
+                newMovie.Index = 6;
+            }
+            else if (newMovie.Year == 2011)
+            {
+                newMovie.Index = 7;
+            }
+
+
+            if (ModifyObject != null)
+            {
+                ModifyObject(this, new ModifyObjectEventArgs(newMovie));
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            lvMovies.Items.Remove(lvMovies.SelectedItems[0]);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            HideBTN();
+            MovieInfo = (MovieObject)lvMovies.Items[row].Tag;
+        }
+
         // Handlers
 
         void HandleClientWindowSize()
@@ -121,10 +255,9 @@ namespace JeanaiRoberts_CE02
 
         }
 
-        // Methods
         private bool RetrieveData()
         {
-            if(conn == null)
+            if (conn == null)
             {
                 return false;
             }
@@ -146,7 +279,7 @@ namespace JeanaiRoberts_CE02
 
         private void AddToListView(DataTable data)
         {
-            foreach(DataRow item in data.Rows)
+            foreach (DataRow item in data.Rows)
             {
                 newMovie = new MovieObject();
 
@@ -157,7 +290,7 @@ namespace JeanaiRoberts_CE02
                 newMovie.Author = item["Author"].ToString();
                 newMovie.Genre = item["Genre"].ToString();
 
-                if(newMovie.Year == 2001)
+                if (newMovie.Year == 2001)
                 {
                     newMovie.Index = 0;
                 }
@@ -167,7 +300,7 @@ namespace JeanaiRoberts_CE02
                 }
                 else if (newMovie.Year == 2004)
                 {
-                    newMovie.Index = 2; 
+                    newMovie.Index = 2;
                 }
                 else if (newMovie.Year == 2005)
                 {
@@ -185,8 +318,33 @@ namespace JeanaiRoberts_CE02
 
                 lvMovies.Items.Add(lvi);
                 MovieInfo = (MovieObject)lvMovies.Items[0].Tag;
-                
+
             }
+        }
+
+        public void HandleModifyObject(object sender, ModifyObjectEventArgs e)
+        {
+            MovieObject m = e.CourseToModify1 as MovieObject;
+
+            if (lvMovies.SelectedItems != null)
+            {
+                lvMovies.SelectedItems[0].Text = m.ToString();
+                lvMovies.SelectedItems[0].Tag = m; ;
+                lvMovies.SelectedItems[0].ImageIndex = m.Index;
+
+            }
+
+            btnApply.Visible = false;
+            btnCancel.Visible = false;
+        }
+
+        // Methods
+
+        void HideBTN()
+        {
+            btnApply.Visible = false;
+            btnSave.Visible = false;
+            btnCancel.Visible = false;
         }
 
         void ClearInput()
@@ -196,70 +354,6 @@ namespace JeanaiRoberts_CE02
             cmbPublisher.Text = null;
             txtAuthor.Clear();
             cmbGenre.Text = null;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            ClearInput();
-            btnSave.Visible = true;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            newMovie = new MovieObject();
-
-            while (String.IsNullOrWhiteSpace(txtTitle.Text))
-            {
-                MessageBox.Show("Please enter a vaild input!");
-                newMovie.Title = txtTitle.Text;
-            }
-            
-
-
-
-            newMovie.Year = numYear.Value;
-            newMovie.Publisher = cmbGenre.Text;
-            newMovie.Author = txtAuthor.Text;
-            newMovie.Genre = cmbGenre.Text;
-
-            lvi = new ListViewItem();
-            lvi.Tag = newMovie;
-            lvi.ImageIndex = newMovie.Index;
-            lvi.Text = newMovie.ToString();
-
-            lvMovies.Items.Add(lvi);
-
-            
-        }
-
-        private void btnPrevious_Click(object sender, EventArgs e)
-        {
-            if(row -1 >= 0)
-            {
-                row--;
-
-                txtTitle.Text = movieData.Rows[row]["Title"].ToString();
-                string yearString = movieData.Rows[row]["YearReleased"].ToString();
-                numYear.Value = Convert.ToDecimal(yearString);
-                cmbPublisher.Text = movieData.Rows[row]["Publisher"].ToString();
-                txtAuthor.Text = movieData.Rows[row]["Author"].ToString();
-                cmbGenre.Text = movieData.Rows[row]["Genre"].ToString();
-            }
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            if (row + 1 < movieData.Select().Length)
-            {
-                row++;
-
-                txtTitle.Text = movieData.Rows[row]["Title"].ToString();
-                string yearString = movieData.Rows[row]["YearReleased"].ToString();
-                numYear.Value = Convert.ToDecimal(yearString);
-                cmbPublisher.Text = movieData.Rows[row]["Publisher"].ToString();
-                txtAuthor.Text = movieData.Rows[row]["Author"].ToString();
-                cmbGenre.Text = movieData.Rows[row]["Genre"].ToString();
-            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace JeanaiRoberts_CE02
             }
 
             // return the entire string
-            return $"server=192.168.1.75;uid=dbsAdmin;pwd=password;database=Series;SslMode=none;port={port};";
+            return $"server={serverIP};uid=dbsAdmin;pwd=password;database=Series;SslMode=none;port={port};";
         }
 
         public static MySqlConnection Connect(string myConnectionString)
