@@ -117,8 +117,23 @@ namespace JeanaiRoberts_CE02
 
             lvMovies.Items.Add(lvi);
 
+            string sql = "INSERT INTO SeriesTitles (Title, YearReleased, Publisher, Author, Genre) VALUES (@Title, @YearReleased, @Publisher, @Author, @Genre);";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@Title", newMovie.Title);
+            cmd.Parameters.AddWithValue("@YearReleased", newMovie.Year);
+            cmd.Parameters.AddWithValue("@Publisher", newMovie.Publisher);
+            cmd.Parameters.AddWithValue("@Author", newMovie.Author);
+            cmd.Parameters.AddWithValue("@Genre", newMovie.Genre);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
             btnSave.Visible = false;
             btnCancel.Visible = false;
+
+            rdr.Close();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -146,7 +161,9 @@ namespace JeanaiRoberts_CE02
             btnApply.Visible = true;
             btnCancel.Visible = true;
 
-            if( lvMovies.SelectedItems.Count > 0)
+            row = lvMovies.Items.IndexOf(lvMovies.SelectedItems[0]);
+
+            if ( lvMovies.SelectedItems.Count > 0)
             {
                 MovieInfo = (MovieObject)lvMovies.SelectedItems[0].Tag;
             }
@@ -215,6 +232,19 @@ namespace JeanaiRoberts_CE02
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            int sqlIndex = lvMovies.SelectedItems[0].Index + 1;
+
+            string sql = "DELETE FROM SeriesTitles WHERE id = @id;";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", sqlIndex);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            rdr.Close();
+
             lvMovies.Items.Remove(lvMovies.SelectedItems[0]);
         }
 
@@ -228,7 +258,6 @@ namespace JeanaiRoberts_CE02
 
         void HandleClientWindowSize()
         {
-
             //Modify ONLY these float values
 
             float HeightValueToChange = 1.4f;
@@ -263,7 +292,7 @@ namespace JeanaiRoberts_CE02
             }
             else
             {
-                string sql = "SELECT Title, YearReleased, Publisher, Author, Genre FROM SeriesTitles LIMIT 5;";
+                string sql = "SELECT Title, YearReleased, Publisher, Author, Genre FROM SeriesTitles LIMIT 10;";
 
                 MySqlDataAdapter adr = new MySqlDataAdapter(sql, conn);
 
@@ -334,8 +363,27 @@ namespace JeanaiRoberts_CE02
 
             }
 
+            int sqlIndex = lvMovies.SelectedItems[0].Index + 1;
+
+            string sql = "UPDATE SeriesTitles SET Title = @Title, YearReleased = @YearReleased, Publisher = @Publisher, Author = @Author, Genre = @Genre WHERE id = @id;";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", sqlIndex);
+            cmd.Parameters.AddWithValue("@Title", m.Title);
+            cmd.Parameters.AddWithValue("@YearReleased", m.Year);
+            cmd.Parameters.AddWithValue("@Publisher", m.Publisher);
+            cmd.Parameters.AddWithValue("@Author", m.Author);
+            cmd.Parameters.AddWithValue("@Genre", m.Genre);
+            
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
             btnApply.Visible = false;
             btnCancel.Visible = false;
+
+            rdr.Close();
         }
 
         // Methods
