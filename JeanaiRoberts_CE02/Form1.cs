@@ -387,6 +387,18 @@ namespace JeanaiRoberts_CE02
                 {
                     newMovie.Index = 4;
                 }
+                else if (newMovie.Year == 2009)
+                {
+                    newMovie.Index = 5;
+                }
+                else if (newMovie.Year == 2010)
+                {
+                    newMovie.Index = 6;
+                }
+                else if (newMovie.Year == 2011)
+                {
+                    newMovie.Index = 7;
+                }
 
                 lvi = new ListViewItem();
                 lvi.Tag = newMovie;
@@ -478,7 +490,10 @@ namespace JeanaiRoberts_CE02
             int year;
             bool sucess = int.TryParse(sYear, out year);
 
-            if (year != 2001)
+            List<int> years = new List<int> {2001, 2002, 2004, 2005, 2007, 2009, 2010, 2011};
+            
+
+            if (!years.Contains(year))
             {
                 // Include error messages for incorrect input.
                 MessageBox.Show("Invalid year please use: \n 2001-2002, 2004-2005, 2007, 2009 - 2011", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
