@@ -16,6 +16,7 @@ namespace JeanaiRoberts_CE02
             string serverIP = "";
             string port = "";
 
+            // Try catch statement
             try
             {
                 // open the text file using a streamreader
@@ -34,12 +35,19 @@ namespace JeanaiRoberts_CE02
             }
 
             // return the entire string
+            // UID: dbsAdmin Password: password
+            // Add SslMode = none to connection string
             return $"server={serverIP};uid=dbsAdmin;pwd=password;database=Series;SslMode=none;port={port};";
         }
 
+        
+        
+        
         public static MySqlConnection Connect(string myConnectionString)
         {
             MySqlConnection conn = new MySqlConnection();
+
+            // Try catch statement
             // inside here is where we will try to connect to the database
             try
             {
