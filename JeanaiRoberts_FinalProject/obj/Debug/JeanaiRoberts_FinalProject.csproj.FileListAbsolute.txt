@@ -13,3 +13,6 @@
 \\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\obj\Debug\JeanaiRoberts_FinalProject.pdb
 \\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\bin\Debug\Newtonsoft.Json.dll
 \\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\bin\Debug\Newtonsoft.Json.xml
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\obj\Debug\JeanaiRoberts_FinalProject.ListView.resources
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\obj\Debug\JeanaiRoberts_FinalProject.newList.resources
+\\vmware-host\Shared Folders\Desktop\GitHub\dvp3-2101-JDRoberts1\JeanaiRoberts_FinalProject\obj\Debug\JeanaiRoberts_FinalProject.SaveList.resources

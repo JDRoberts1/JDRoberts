@@ -16,14 +16,16 @@ namespace JeanaiRoberts_FinalProject
 {
     public partial class Form1 : Form
     {
-
         WebClient apiConnection = new WebClient();
 
         string API = "http://www.omdbapi.com/?apikey=1a2565db&t=";
 
         string APIEndPoint;
 
-        //string endAPI = "";
+        ListView listView;
+        SaveList selectList;
+        newList newList;
+        movieData newMovie;
 
         public Form1()
         {
@@ -36,9 +38,6 @@ namespace JeanaiRoberts_FinalProject
             string sTitle = ReturnTitle();
 
             APIEndPoint = API + sTitle;
-
-            // debug
-            textBox7.Text = APIEndPoint;
         }
         
         private string ReturnTitle()
@@ -46,7 +45,6 @@ namespace JeanaiRoberts_FinalProject
             string apiTitle = textBox1.Text.Replace(" ", "-");
 
             return apiTitle;
-
         }
 
         void HandleClientWindowSize()
@@ -74,17 +72,13 @@ namespace JeanaiRoberts_FinalProject
             //this.Size = new Size(width, height);
 
             this.Size = new Size(376, 720);
-
         }
 
         private void ReadTheJSONData()
         {
             // the var dataType lets the application decide what dataType to use when the code runs
             var apiData = apiConnection.DownloadString(APIEndPoint);
-
-            // DEBUG: Messagebox to display apiData string
-            MessageBox.Show("The string: \n" + apiData);
-
+            
             // parse the datastring to a JObject
             JObject o = JObject.Parse(apiData);
 
@@ -97,12 +91,6 @@ namespace JeanaiRoberts_FinalProject
             textBox5.Text = o["Genre"].ToString();
             textBox6.Text = o["Plot"].ToString();
 
-            // DEBUG: MESSAGEBOX to show the object
-            //MessageBox.Show("The JObject:\n" + o.ToString());
-
-            // DEBUG : Messagebox to display what is contained within the results key
-            //MessageBox.Show(specifics);
-
             textBox1.Clear();
         }
 
@@ -110,7 +98,12 @@ namespace JeanaiRoberts_FinalProject
         {
             BuildAPI();
             ReadTheJSONData();
-            
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            listView = new ListView();
+            listView.Show();
         }
     }
 }
