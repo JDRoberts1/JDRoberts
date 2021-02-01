@@ -9,7 +9,7 @@ namespace JeanaiRoberts_FinalProject
     public class movieData
     {
         string movieTitle;
-        string relased;
+        DateTime relased;
         string rated;
         string runtime;
         string genre;
@@ -22,7 +22,7 @@ namespace JeanaiRoberts_FinalProject
             set { movieTitle = value; }
         }
 
-        public string ReleaseDate
+        public DateTime ReleaseDate
         {
             get { return relased; }
 

@@ -138,6 +138,14 @@ namespace JeanaiRoberts_FinalProject
             list.DeleteMovie += new EventHandler(HandleDelete);
             AddToList += new EventHandler(list.HandleAddToList);
             AddBackToList += new EventHandler(list.HandleLoadList);
+
+            if (list == null)
+            {
+                list = new ListView();
+
+            }
+
+            list.DisplayMovie += new EventHandler(HandleDisplayMovie);
         }
 
         // Adds the newMovie object to the SQL database and to the ListBox
@@ -150,7 +158,8 @@ namespace JeanaiRoberts_FinalProject
 
             newMovie = new movieData();
             newMovie.MovieTitle = txtTitle.Text;
-            newMovie.ReleaseDate = dateReleased.Text;
+            DateTime date = Convert.ToDateTime(dateReleased.Text);
+            newMovie.ReleaseDate = date;
             newMovie.Rated = txtRating.Text;
             newMovie.Genre = txtGenre.Text;
             newMovie.Runtime = txtRuntime.Text;
@@ -170,7 +179,7 @@ namespace JeanaiRoberts_FinalProject
 
             cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@MovieTitle", newMovie.MovieTitle);
-            cmd.Parameters.AddWithValue("@DateReleased", newMovie.ReleaseDate);
+            cmd.Parameters.AddWithValue("@DateReleased", newMovie.ReleaseDate.ToShortDateString());
             cmd.Parameters.AddWithValue("@Rated", newMovie.Rated);
             cmd.Parameters.AddWithValue("@Genre", newMovie.Genre);
             cmd.Parameters.AddWithValue("@Runtime", newMovie.Runtime);
@@ -192,13 +201,15 @@ namespace JeanaiRoberts_FinalProject
         // Updates the database and removes the object
         public void HandleDelete(object sender, EventArgs e)
         {
+            movieData deleteMovie = (movieData)sender;
+
             // application must be able to pass information to and from a database
-            string sql = "DELETE FROM Watchlater WHERE Title = @Title;";
+            string sql = "DELETE FROM Watchlater WHERE MovieTitle = @MovieTitle;";
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             cmd = new MySqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@MovieTitle", newMovie.MovieTitle);
+            cmd.Parameters.AddWithValue("@MovieTitle", deleteMovie.MovieTitle);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -219,7 +230,9 @@ namespace JeanaiRoberts_FinalProject
             {
                 newMovie = new movieData();
                 newMovie.MovieTitle = rdr["MovieTitle"].ToString();
-                newMovie.ReleaseDate = rdr["DateReleased"].ToString();
+                string strDate = rdr["DateReleased"].ToString();
+                DateTime date = Convert.ToDateTime(strDate);
+                newMovie.ReleaseDate = date;
                 newMovie.Rated = rdr["Rated"].ToString();
                 newMovie.Genre = rdr["Genre"].ToString();
                 newMovie.Runtime = rdr["Runtime"].ToString();
@@ -242,6 +255,17 @@ namespace JeanaiRoberts_FinalProject
             label6.Text = null;
         }
 
+        public void HandleDisplayMovie(object sender, EventArgs e)
+        {
+            movieData selectedMovie = (movieData)sender;
 
+            txtTitle.Text = selectedMovie.MovieTitle;
+            dateReleased.Text = selectedMovie.ReleaseDate.ToShortDateString();
+            txtRating.Text = selectedMovie.Rated;
+            txtGenre.Text = selectedMovie.Genre;
+            txtRuntime.Text = selectedMovie.Runtime;
+            txtPlot.Text = selectedMovie.Plot;
+
+        }
     }
 }
