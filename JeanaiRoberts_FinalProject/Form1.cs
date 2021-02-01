@@ -17,6 +17,7 @@ namespace JeanaiRoberts_FinalProject
 {
     public partial class Form1 : Form
     {
+        // API String beginning
         string API = "http://www.omdbapi.com/?apikey=1a2565db&t=";
         string APIEndPoint;
 
@@ -39,6 +40,7 @@ namespace JeanaiRoberts_FinalProject
             conn = DBUtilities.Connect(connectionString);
         }
 
+        // Builds the API string for the API call
         private void BuildAPI()
         {
             string sTitle = ReturnTitle();
@@ -46,6 +48,7 @@ namespace JeanaiRoberts_FinalProject
             APIEndPoint = API + sTitle;
         }
         
+        // Replaces the spaces in the movie tile with dashes for API 
         private string ReturnTitle()
         {
             string apiTitle = txtSearch.Text.Replace(" ", "-");
@@ -53,6 +56,7 @@ namespace JeanaiRoberts_FinalProject
             return apiTitle;
         }
 
+        // Corrects iPhone background
         void HandleClientWindowSize()
         {
             //Modify ONLY these float values
@@ -80,6 +84,7 @@ namespace JeanaiRoberts_FinalProject
             this.Size = new Size(376, 720);
         }
 
+        // Read the API data
         private void ReadTheJSONData()
         {
             // the var dataType lets the application decide what dataType to use when the code runs
@@ -97,6 +102,7 @@ namespace JeanaiRoberts_FinalProject
             txtSearch.Clear();
         }
 
+        // Search the movie in the API
         private void button1_Click(object sender, EventArgs e)
         {
             label6.Text = null;
@@ -105,6 +111,7 @@ namespace JeanaiRoberts_FinalProject
             ReadTheJSONData();
         }
 
+        // Allows the user to view the saved movies
         private void btnView_Click(object sender, EventArgs e)
         {
             ClearInput();
@@ -113,7 +120,6 @@ namespace JeanaiRoberts_FinalProject
             {
                 list = new ListView();
             }
-
 
             RetrieveMovies();
 
@@ -134,6 +140,7 @@ namespace JeanaiRoberts_FinalProject
             AddBackToList += new EventHandler(list.HandleLoadList);
         }
 
+        // Adds the newMovie object to the SQL database and to the ListBox
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(list == null)
@@ -176,12 +183,13 @@ namespace JeanaiRoberts_FinalProject
             label6.Text = "Movie Added!";
         }
 
+        // CLoses the application gracefully
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        // Handlers
+        // Updates the database and removes the object
         public void HandleDelete(object sender, EventArgs e)
         {
             // application must be able to pass information to and from a database
@@ -197,6 +205,7 @@ namespace JeanaiRoberts_FinalProject
             rdr.Close();
         }
 
+        // Loads the users movie database back into the ListBox
         public void RetrieveMovies()
         {
             string sql = "SELECT MovieTitle, DateReleased, Rated, Genre, Runtime, Plot FROM Watchlater;";
@@ -221,6 +230,7 @@ namespace JeanaiRoberts_FinalProject
             rdr.Close();
         }
 
+        // Clears search results
         public void ClearInput()
         {
             txtTitle.Clear();
@@ -231,5 +241,7 @@ namespace JeanaiRoberts_FinalProject
             dateReleased.Text = null;
             label6.Text = null;
         }
+
+
     }
 }
