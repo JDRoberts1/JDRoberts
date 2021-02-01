@@ -12,9 +12,26 @@ namespace JeanaiRoberts_FinalProject
 {
     public partial class newList : Form
     {
+        public string tableName;
+
         public newList()
         {
             InitializeComponent();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(txtListName.Text != null)
+            {
+                tableName = txtListName.Text;
+            }
+
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

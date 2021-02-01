@@ -12,6 +12,8 @@ namespace JeanaiRoberts_FinalProject
 {
     public partial class ListView : Form
     {
+        public EventHandler DeleteMovie;
+
         public ListView()
         {
             InitializeComponent();
@@ -21,9 +23,7 @@ namespace JeanaiRoberts_FinalProject
         //Call this method AFTER InitializeComponent() inside the form's constructor.
 
         void HandleClientWindowSize()
-
         {
-
             //Modify ONLY these float values
 
             float HeightValueToChange = 1.4f;
@@ -47,7 +47,30 @@ namespace JeanaiRoberts_FinalProject
             this.Size = new Size(width, height);
 
             this.Size = new Size(376, 720);
+        }
 
+        public void HandleAddTOListView(object sender, EventArgs e)
+        {
+
+            movieData movie = (sender as movieData);
+
+            ListViewItem lvi = new ListViewItem();
+
+            lvi.Tag = movie;
+            lvi.Text = movie.ToString();
+
+            listView1.Items.Add(lvi);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            movieData title = (movieData)listView1.SelectedItems[0].Tag;
+
+            sender = title;
+
+            DeleteMovie?.Invoke(sender, new EventArgs());
+
+            listView1.Items.Remove(listView1.SelectedItems[0]);
         }
     }
 }

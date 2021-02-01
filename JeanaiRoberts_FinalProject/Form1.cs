@@ -11,26 +11,30 @@ using System.Net;
 using RestSharp;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using MySql.Data.MySqlClient;
 
 namespace JeanaiRoberts_FinalProject
 {
     public partial class Form1 : Form
     {
-        WebClient apiConnection = new WebClient();
-
         string API = "http://www.omdbapi.com/?apikey=1a2565db&t=";
-
         string APIEndPoint;
 
         ListView listView;
-        SaveList selectList;
-        newList newList;
         movieData newMovie;
+
+        public EventHandler AddToListView;
+        WebClient apiConnection = new WebClient();
+        MySqlConnection conn = new MySqlConnection();
+        
 
         public Form1()
         {
             InitializeComponent();
             HandleClientWindowSize();
+
+            string connectionString = DBUtilities.BuildConnectionString();
+            conn = DBUtilities.Connect(connectionString);
         }
 
         private void BuildAPI()
@@ -42,7 +46,7 @@ namespace JeanaiRoberts_FinalProject
         
         private string ReturnTitle()
         {
-            string apiTitle = textBox1.Text.Replace(" ", "-");
+            string apiTitle = txtSearch.Text.Replace(" ", "-");
 
             return apiTitle;
         }
@@ -84,14 +88,14 @@ namespace JeanaiRoberts_FinalProject
 
             // string variable to hold specific data from the JSON object 
             // The second set of square brackets indicates that we want to see the very first element in the array of JSON Data
-            textBox2.Text = o["Title"].ToString();
-            textBox3.Text = o["Released"].ToString();
-            textBox4.Text = o["Rated"].ToString();
-            textBox8.Text = o["Runtime"].ToString();
-            textBox5.Text = o["Genre"].ToString();
-            textBox6.Text = o["Plot"].ToString();
+            txtTitle.Text = o["Title"].ToString();
+            dateReleased.Text = o["Released"].ToString();
+            txtRating.Text = o["Rated"].ToString();
+            txtRuntime.Text = o["Runtime"].ToString();
+            txtGenre.Text = o["Genre"].ToString();
+            txtPlot.Text = o["Plot"].ToString();
 
-            textBox1.Clear();
+            txtSearch.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -103,7 +107,60 @@ namespace JeanaiRoberts_FinalProject
         private void btnView_Click(object sender, EventArgs e)
         {
             listView = new ListView();
-            listView.Show();
+
+            
+            listView.ShowDialog();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            listView = new ListView();
+
+            AddToListView += new EventHandler(listView.HandleAddTOListView);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            listView = new ListView();
+            newMovie = new movieData();
+            newMovie.MovieTitle = txtTitle.Text;
+            newMovie.ReleaseDate = dateReleased.Text;
+            newMovie.Rated = txtRating.Text;
+            newMovie.Genre = txtGenre.Text;
+            newMovie.Runtime = txtRuntime.Text;
+            newMovie.Plot = txtPlot.Text;
+
+            sender = newMovie;
+
+            if(AddToListView != null)
+            {
+                AddToListView(sender, new EventArgs());
+            }
+
+            // application must be able to pass information to and from a database
+            string sql = "INSERT INTO SeriesTitles (MovieTitle, DateReleased, Rated, Genre, Runtime, Plot) VALUES (@MovieTitle, @DateReleased, @Rated, @Genre, @Runtime, @Plot);";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MovieTitle", newMovie.MovieTitle);
+            cmd.Parameters.AddWithValue("@DateReleased", newMovie.ReleaseDate);
+            cmd.Parameters.AddWithValue("@Rated", newMovie.Rated);
+            cmd.Parameters.AddWithValue("@Genre", newMovie.Genre);
+            cmd.Parameters.AddWithValue("@Runtime", newMovie.Runtime);
+            cmd.Parameters.AddWithValue("@Plot", newMovie.Plot);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            rdr.Close();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        // Handlers
+
     }
 }
