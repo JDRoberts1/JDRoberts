@@ -30,6 +30,7 @@ namespace JeanaiRoberts_FinalProject
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateReleased = new System.Windows.Forms.DateTimePicker();
             this.btnView = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtRuntime = new System.Windows.Forms.TextBox();
@@ -49,13 +50,14 @@ namespace JeanaiRoberts_FinalProject
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dateReleased = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.dateReleased);
             this.groupBox1.Controls.Add(this.btnView);
             this.groupBox1.Controls.Add(this.btnAdd);
@@ -80,6 +82,14 @@ namespace JeanaiRoberts_FinalProject
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // dateReleased
+            // 
+            this.dateReleased.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateReleased.Location = new System.Drawing.Point(259, 369);
+            this.dateReleased.Name = "dateReleased";
+            this.dateReleased.Size = new System.Drawing.Size(220, 31);
+            this.dateReleased.TabIndex = 20;
             // 
             // btnView
             // 
@@ -230,7 +240,7 @@ namespace JeanaiRoberts_FinalProject
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(605, 48);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -239,23 +249,23 @@ namespace JeanaiRoberts_FinalProject
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 44);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // dateReleased
+            // label6
             // 
-            this.dateReleased.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateReleased.Location = new System.Drawing.Point(259, 369);
-            this.dateReleased.Name = "dateReleased";
-            this.dateReleased.Size = new System.Drawing.Size(220, 31);
-            this.dateReleased.TabIndex = 20;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(254, 935);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 25);
+            this.label6.TabIndex = 21;
             // 
             // Form1
             // 
@@ -302,6 +312,7 @@ namespace JeanaiRoberts_FinalProject
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DateTimePicker dateReleased;
+        private System.Windows.Forms.Label label6;
     }
 }
 

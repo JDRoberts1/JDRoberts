@@ -25,6 +25,7 @@ namespace JeanaiRoberts_FinalProject
         List<movieData> movies;
 
         public EventHandler AddToList;
+        public EventHandler AddBackToList;
         WebClient apiConnection = new WebClient();
         MySqlConnection conn = new MySqlConnection();
         
@@ -98,25 +99,39 @@ namespace JeanaiRoberts_FinalProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+            label6.Text = null;
+
             BuildAPI();
             ReadTheJSONData();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
+            ClearInput();
+
             if(list == null)
             {
                 list = new ListView();
             }
 
-            list.ShowDialog();
+
             RetrieveMovies();
+
+            sender = movies;
+
+            if (AddBackToList != null)
+            {
+                AddBackToList(sender, new EventArgs());
+            }
+
+            list.ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             list.DeleteMovie += new EventHandler(HandleDelete);
             AddToList += new EventHandler(list.HandleAddToList);
+            AddBackToList += new EventHandler(list.HandleLoadList);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -157,6 +172,8 @@ namespace JeanaiRoberts_FinalProject
             MySqlDataReader rdr = cmd.ExecuteReader();
 
             rdr.Close();
+
+            label6.Text = "Movie Added!";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -180,7 +197,7 @@ namespace JeanaiRoberts_FinalProject
             rdr.Close();
         }
 
-        public void RetrieveData()
+        public void RetrieveMovies()
         {
             string sql = "SELECT MovieTitle, DateReleased, Rated, Genre, Runtime, Plot FROM Watchlater;";
 
@@ -194,11 +211,25 @@ namespace JeanaiRoberts_FinalProject
                 newMovie = new movieData();
                 newMovie.MovieTitle = rdr["MovieTitle"].ToString();
                 newMovie.ReleaseDate = rdr["DateReleased"].ToString();
-                newMovie.Rated = txtRating.Text;
-                newMovie.Genre = txtGenre.Text;
-                newMovie.Runtime = txtRuntime.Text;
-                newMovie.Plot = txtPlot.Text;
+                newMovie.Rated = rdr["Rated"].ToString();
+                newMovie.Genre = rdr["Genre"].ToString();
+                newMovie.Runtime = rdr["Runtime"].ToString();
+                newMovie.Plot = rdr["Plot"].ToString();
+                movies.Add(newMovie);
             }
+
+            rdr.Close();
+        }
+
+        public void ClearInput()
+        {
+            txtTitle.Clear();
+            txtRating.Clear();
+            txtRuntime.Clear();
+            txtGenre.Clear();
+            txtPlot.Clear();
+            dateReleased.Text = null;
+            label6.Text = null;
         }
     }
 }

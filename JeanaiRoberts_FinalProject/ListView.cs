@@ -61,9 +61,11 @@ namespace JeanaiRoberts_FinalProject
         {
             List<movieData> movies = (List<movieData>)sender;
 
-            foreach(movieData m in movies)
+            HandleClearList();
+
+            foreach (movieData m in movies)
             {
-                listBox1.Items.Add(m.ToString());
+                listBox1.Items.Add(m);
             }
         }
 
@@ -76,6 +78,11 @@ namespace JeanaiRoberts_FinalProject
             DeleteMovie?.Invoke(sender, new EventArgs());
 
             listBox1.Items.Remove(listBox1.SelectedItems[0]);
+        }
+
+        public void HandleClearList()
+        {
+            listBox1.Items.Clear();
         }
     }
 }
