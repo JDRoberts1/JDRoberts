@@ -255,6 +255,7 @@ namespace JeanaiRoberts_FinalProject
             label6.Text = null;
         }
 
+        // Handles the event to display the movie that is double clicked
         public void HandleDisplayMovie(object sender, EventArgs e)
         {
             movieData selectedMovie = (movieData)sender;
@@ -265,7 +266,7 @@ namespace JeanaiRoberts_FinalProject
             txtGenre.Text = selectedMovie.Genre;
             txtRuntime.Text = selectedMovie.Runtime;
             txtPlot.Text = selectedMovie.Plot;
-
         }
+
     }
 }

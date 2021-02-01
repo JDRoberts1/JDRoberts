@@ -83,6 +83,7 @@ namespace JeanaiRoberts_FinalProject
             listBox1.Items.Remove(listBox1.SelectedItems[0]);
         }
 
+        // Clears the listbox
         public void HandleClearList()
         {
             listBox1.Items.Clear();

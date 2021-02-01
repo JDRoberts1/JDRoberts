@@ -51,6 +51,9 @@ namespace JeanaiRoberts_FinalProject
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.landscapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portraitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -237,10 +240,11 @@ namespace JeanaiRoberts_FinalProject
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 27);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(605, 42);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -266,6 +270,27 @@ namespace JeanaiRoberts_FinalProject
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 25);
             this.label6.TabIndex = 21;
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.landscapeToolStripMenuItem,
+            this.portraitToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // landscapeToolStripMenuItem
+            // 
+            this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
+            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.landscapeToolStripMenuItem.Text = "Landscape";
+            // 
+            // portraitToolStripMenuItem
+            // 
+            this.portraitToolStripMenuItem.Name = "portraitToolStripMenuItem";
+            this.portraitToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.portraitToolStripMenuItem.Text = "Portrait";
             // 
             // Form1
             // 
@@ -313,6 +338,9 @@ namespace JeanaiRoberts_FinalProject
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DateTimePicker dateReleased;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem landscapeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem portraitToolStripMenuItem;
     }
 }
 
