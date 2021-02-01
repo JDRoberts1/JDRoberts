@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JeanaiRoberts_FinalProject
 {
-    class movieData
+    public class movieData
     {
         string movieTitle;
         string relased;

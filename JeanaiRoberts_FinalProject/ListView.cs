@@ -13,7 +13,8 @@ namespace JeanaiRoberts_FinalProject
     public partial class ListView : Form
     {
         public EventHandler DeleteMovie;
-
+        public EventHandler RetrieveData;
+        
         public ListView()
         {
             InitializeComponent();
@@ -49,28 +50,32 @@ namespace JeanaiRoberts_FinalProject
             this.Size = new Size(376, 720);
         }
 
-        public void HandleAddTOListView(object sender, EventArgs e)
+        public void HandleAddToList(object sender, EventArgs e)
         {
+            movieData movie = (movieData)sender;
 
-            movieData movie = (sender as movieData);
+            listBox1.Items.Add(movie);
+        }
 
-            ListViewItem lvi = new ListViewItem();
+        public void HandleLoadList(object sender, EventArgs e)
+        {
+            List<movieData> movies = (List<movieData>)sender;
 
-            lvi.Tag = movie;
-            lvi.Text = movie.ToString();
-
-            listView1.Items.Add(lvi);
+            foreach(movieData m in movies)
+            {
+                listBox1.Items.Add(m.ToString());
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            movieData title = (movieData)listView1.SelectedItems[0].Tag;
+            movieData title = (movieData)listBox1.SelectedItems[0];
 
             sender = title;
 
             DeleteMovie?.Invoke(sender, new EventArgs());
 
-            listView1.Items.Remove(listView1.SelectedItems[0]);
+            listBox1.Items.Remove(listBox1.SelectedItems[0]);
         }
     }
 }

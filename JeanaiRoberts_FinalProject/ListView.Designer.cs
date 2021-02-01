@@ -32,7 +32,7 @@ namespace JeanaiRoberts_FinalProject
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.gbMovieList = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.gbMovieList.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@ namespace JeanaiRoberts_FinalProject
             // 
             // gbMovieList
             // 
-            this.gbMovieList.Controls.Add(this.listView1);
+            this.gbMovieList.Controls.Add(this.listBox1);
             this.gbMovieList.Location = new System.Drawing.Point(0, 30);
             this.gbMovieList.Name = "gbMovieList";
             this.gbMovieList.Size = new System.Drawing.Size(576, 854);
@@ -68,16 +68,15 @@ namespace JeanaiRoberts_FinalProject
             this.gbMovieList.TabStop = false;
             this.gbMovieList.Text = "Movie List";
             // 
-            // listView1
+            // listBox1
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 27);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(570, 824);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 25;
+            this.listBox1.Location = new System.Drawing.Point(3, 27);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(570, 824);
+            this.listBox1.TabIndex = 0;
             // 
             // ListView
             // 
@@ -102,6 +101,6 @@ namespace JeanaiRoberts_FinalProject
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.GroupBox gbMovieList;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

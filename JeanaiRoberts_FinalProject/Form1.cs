@@ -20,10 +20,11 @@ namespace JeanaiRoberts_FinalProject
         string API = "http://www.omdbapi.com/?apikey=1a2565db&t=";
         string APIEndPoint;
 
-        ListView listView;
+        ListView list = new ListView();
         movieData newMovie;
+        List<movieData> movies;
 
-        public EventHandler AddToListView;
+        public EventHandler AddToList;
         WebClient apiConnection = new WebClient();
         MySqlConnection conn = new MySqlConnection();
         
@@ -82,12 +83,9 @@ namespace JeanaiRoberts_FinalProject
         {
             // the var dataType lets the application decide what dataType to use when the code runs
             var apiData = apiConnection.DownloadString(APIEndPoint);
-            
+
             // parse the datastring to a JObject
             JObject o = JObject.Parse(apiData);
-
-            // string variable to hold specific data from the JSON object 
-            // The second set of square brackets indicates that we want to see the very first element in the array of JSON Data
             txtTitle.Text = o["Title"].ToString();
             dateReleased.Text = o["Released"].ToString();
             txtRating.Text = o["Rated"].ToString();
@@ -106,22 +104,28 @@ namespace JeanaiRoberts_FinalProject
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            listView = new ListView();
+            if(list == null)
+            {
+                list = new ListView();
+            }
 
-            
-            listView.ShowDialog();
+            list.ShowDialog();
+            RetrieveMovies();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listView = new ListView();
-
-            AddToListView += new EventHandler(listView.HandleAddTOListView);
+            list.DeleteMovie += new EventHandler(HandleDelete);
+            AddToList += new EventHandler(list.HandleAddToList);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            listView = new ListView();
+            if(list == null)
+            {
+                list = new ListView();
+            }
+
             newMovie = new movieData();
             newMovie.MovieTitle = txtTitle.Text;
             newMovie.ReleaseDate = dateReleased.Text;
@@ -132,13 +136,13 @@ namespace JeanaiRoberts_FinalProject
 
             sender = newMovie;
 
-            if(AddToListView != null)
+            if(AddToList != null)
             {
-                AddToListView(sender, new EventArgs());
+                AddToList(sender, new EventArgs());
             }
 
             // application must be able to pass information to and from a database
-            string sql = "INSERT INTO SeriesTitles (MovieTitle, DateReleased, Rated, Genre, Runtime, Plot) VALUES (@MovieTitle, @DateReleased, @Rated, @Genre, @Runtime, @Plot);";
+            string sql = "INSERT INTO Watchlater (MovieTitle, DateReleased, Rated, Genre, Runtime, Plot) VALUES (@MovieTitle, @DateReleased, @Rated, @Genre, @Runtime, @Plot);";
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -161,6 +165,40 @@ namespace JeanaiRoberts_FinalProject
         }
 
         // Handlers
+        public void HandleDelete(object sender, EventArgs e)
+        {
+            // application must be able to pass information to and from a database
+            string sql = "DELETE FROM Watchlater WHERE Title = @Title;";
 
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@MovieTitle", newMovie.MovieTitle);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            rdr.Close();
+        }
+
+        public void RetrieveData()
+        {
+            string sql = "SELECT MovieTitle, DateReleased, Rated, Genre, Runtime, Plot FROM Watchlater;";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            movies = new List<movieData>();
+
+            while (rdr.Read())
+            {
+                newMovie = new movieData();
+                newMovie.MovieTitle = rdr["MovieTitle"].ToString();
+                newMovie.ReleaseDate = rdr["DateReleased"].ToString();
+                newMovie.Rated = txtRating.Text;
+                newMovie.Genre = txtGenre.Text;
+                newMovie.Runtime = txtRuntime.Text;
+                newMovie.Plot = txtPlot.Text;
+            }
+        }
     }
 }
